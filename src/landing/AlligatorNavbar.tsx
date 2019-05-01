@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { NavHashLink } from 'react-router-hash-link';
+import { NavHashLink as NavLink } from 'react-router-hash-link';
 
 import crocodile from './assets/crocodile.svg'
 
@@ -13,32 +13,38 @@ const AlligatorNavbar: React.FC<Props> = ({ style }) => {
         <div className={css(styles.nav, style)}>
             <div>
                 <img src={crocodile} className={css(styles.logo)} alt="logo" />
-                <NavHashLink
+                <NavLink
                     className={css(styles.link)}
-                    to=""
-                >Home</NavHashLink>
-                <NavHashLink
+                    to="/#try"
+                    smooth={true}
+                >Try it now!</NavLink>
+                <NavLink
                     className={css(styles.link)}
-                    to=""
-                >Features</NavHashLink>
-                <NavHashLink
+                    to="/#features"
+                    smooth={true}
+                >Features</NavLink>
+                <NavLink
                     className={css(styles.link)}
-                    to=""
-                >Pricing</NavHashLink>
+                    to="/#pricing"
+                    smooth={true}
+                >Pricing</NavLink>
             </div>
             <div>
-                <NavHashLink
+                <NavLink
                     className={css(styles.link)}
                     to=""
-                >Login</NavHashLink>
-                <NavHashLink
+                    smooth={true}
+                >Login</NavLink>
+                <NavLink
                     className={css(styles.link)}
                     to=""
-                >Sign up</NavHashLink>
-                <NavHashLink
+                    smooth={true}
+                >Sign up</NavLink>
+                <NavLink
                     className={`btn btn-primary ${css(styles.button)}`}
                     to=""
-                >Get Enterprise</NavHashLink>
+                    smooth={true}
+                >Get Enterprise</NavLink>
             </div>
         </div>
     )

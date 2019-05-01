@@ -14,7 +14,7 @@ interface Props {
 
 const ShortenerSection: React.FC<Props> = ({ style }) => {
     return (
-        <div className={css(style, styles.container)}>
+        <div id="try" className={css(style, styles.container)}>
             <ParallaxBanner
                 layers={[
                     {

@@ -13,7 +13,7 @@ interface Props {
 
 const PricingSection: React.FC<Props> = ({ style }) => {
     return (
-        <div className={css(style, styles.container)}>
+        <div id="pricing" className={css(style, styles.container)}>
             <ParallaxBanner
                 layers={[
                     {

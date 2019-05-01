@@ -13,7 +13,7 @@ interface Props {
 
 const FeaturesSection: React.FC<Props> = ({ style }) => {
     return (
-        <div className={css(style, styles.container)}>
+        <div id="features" className={css(style, styles.container)}>
             <h2 className={css(styles.head)}>Learn our features</h2>
             <div className={css(styles.featuresContainer)}>
                 <FeatureBox image={graphImg}>
