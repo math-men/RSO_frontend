@@ -7,11 +7,12 @@
     "@types/node": "11.13.8",
     "@types/react": "16.8.15",
     "@types/react-dom": "16.8.4",
+    "aphrodite": "^2.3.1",
     "bootstrap": "^4.3.1",
-    "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
+    "react-router-hash-link": "^1.2.1",
     "react-scripts": "3.0.0",
     "typescript": "3.4.5"
   },
@@ -35,5 +36,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-hash-link": "^1.2.1"
   }
 }
