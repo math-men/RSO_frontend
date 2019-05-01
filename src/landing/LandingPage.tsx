@@ -26,7 +26,8 @@ const LandingPage: React.FC = () => {
 
 const styles = StyleSheet.create({
     block: {
-        padding: '0 100px',
+        paddingLeft: 100,
+        paddingRight: 100,
     }
 })
 

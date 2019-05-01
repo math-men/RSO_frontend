@@ -23,7 +23,7 @@ const PricingSection: React.FC<Props> = ({ style }) => {
                     },
 
                 ]}
-                style={{ height: '738px' }}
+                style={{ height: '778px' }}
                 className={css(styles.parallax)}
             >
                 <div className={css(styles.parallaxChildren)}>
@@ -57,7 +57,7 @@ const PricingSection: React.FC<Props> = ({ style }) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: 738,
+        height: 778,
         position: 'relative',
     },
     parallax: {
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
         right: 0,
-        top: 60,
+        top: 100,
     },
     pricingContainer: {
         display: 'flex',
