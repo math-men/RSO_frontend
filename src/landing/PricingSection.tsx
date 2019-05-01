@@ -4,8 +4,8 @@ import { ParallaxBanner } from 'react-scroll-parallax';
 
 import PricingBox from './PricingBox';
 
-import backgroundImage from './assets/PricingBg.png';
-import { whitestWhite } from '../styles/colors';
+import backgroundImage from '../assets/background/PricingBg.png';
+import { whitestWhite } from '../assets/colors';
 
 interface Props {
     style?: Object,

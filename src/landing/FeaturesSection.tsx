@@ -3,9 +3,9 @@ import { StyleSheet, css } from 'aphrodite';
 
 import FeatureBox from './FeatureBox';
 
-import deliveryImg from './assets/delivery.svg';
-import graphImg from './assets/graph.svg';
-import worldwideImg from './assets/worldwide.svg';
+import deliveryImg from '../assets/icons/delivery.svg';
+import graphImg from '../assets/icons/graph.svg';
+import worldwideImg from '../assets/icons/worldwide.svg';
 
 interface Props {
     style?: Object,

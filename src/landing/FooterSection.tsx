@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-import { writerBlack } from '../styles/colors';
+import { writerBlack } from '../assets/colors';
 
 interface Props {
     style?: Object,
@@ -15,13 +15,13 @@ const FooterSection: React.FC<Props> = ({ style }) => {
                 <li className={css(styles.listElement)}>Copyright © 2019 Firma. All rights reserved.</li>
                 <li className={css(styles.listElement)}>
                     <Link
-                        to=""
+                        to="/login"
                         className={css(styles.link)}
                     >Login</Link>
                 </li>
                 <li className={css(styles.listElement)}>
                     <Link
-                        to=""
+                        to="/register"
                         className={css(styles.link)}
                     >Register</Link>
                 </li>

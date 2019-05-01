@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
 import LandingPage from './landing/LandingPage';
+import AuthPage from './auth/AuthPage';
 
-import { writerBlack } from './styles/colors';
+import { writerBlack } from './assets/colors';
 
 
 const App: React.FC = () => {
@@ -12,6 +13,7 @@ const App: React.FC = () => {
     <div className={css(styles.app)}>
       <Router>
         <Route path="/" exact component={LandingPage} />
+        <Route path="/(register|login)" component={AuthPage} />
       </Router>
     </div>
   );
@@ -21,6 +23,7 @@ const styles = StyleSheet.create({
   app: {
     textAlign: 'center',
     color: writerBlack,
+    fontFamily: 'Roboto',
   }
 })
 

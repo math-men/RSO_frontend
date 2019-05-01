@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 import { ParallaxBanner } from 'react-scroll-parallax';
 
-import backgroundImage from './assets/ShortenerBg.png';
-import { whitestWhite } from '../styles/colors';
+import backgroundImage from '../assets/background/ShortenerBg.png';
+import { whitestWhite } from '../assets/colors';
 
 import AlligatorInput from './AlligatorInput';
 

@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { NavHashLink as NavLink } from 'react-router-hash-link';
 
-import { whitestWhite } from '../styles/colors';
-import crocodile from './assets/crocodile.svg'
+import { whitestWhite } from '../assets/colors';
+import crocodile from '../assets/icons/crocodile.svg'
 
 interface Props {
     style?: Object,
@@ -78,12 +78,12 @@ export default class AlligatorNavbar extends React.Component<Props> {
                     <div>
                         <NavLink
                             className={css(styles.link)}
-                            to=""
+                            to="/login"
                             smooth
                         >Login</NavLink>
                         <NavLink
                             className={css(styles.link)}
-                            to=""
+                            to="/register"
                             smooth
                         >Sign up</NavLink>
                         <NavLink

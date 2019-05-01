@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-import { leadingBlue, whitestWhite } from '../styles/colors';
+import { leadingBlue, whitestWhite } from '../assets/colors';
 
 
 export default class AlligatorInput extends React.Component {

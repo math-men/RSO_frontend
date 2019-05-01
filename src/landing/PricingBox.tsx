@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-import { whitestWhite, lightGray } from '../styles/colors';
+import { whitestWhite, lightGray } from '../assets/colors';
 
 
 interface Props {

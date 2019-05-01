@@ -4,3 +4,4 @@ export const crocodileGreen = '#6A973A';
 export const writerBlack = '#373A3C';
 export const leadingBlue = '#1C7CD5';
 export const whitestWhite = '#FFFFFF';
+export const smartestBeige = '#ECEEEF';
