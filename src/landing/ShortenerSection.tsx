@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
         padding: 52,
         margin: 'auto',
         width: 700,
+        height: 170,
     },
     btn: {
         padding: '10px 20px',
