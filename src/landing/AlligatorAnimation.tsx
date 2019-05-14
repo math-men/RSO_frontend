@@ -42,11 +42,13 @@ export default class AlligatorAnimation extends React.Component<Props, State> {
             return <img
                 src={alligatorEatingImg}
                 className={css(styles.alligator)}
+                alt="alligator"
             />;
         }
         return <img
             src={alligatorReturningImg}
             className={css(styles.alligator)}
+            alt="alligator"
         />;
     };
 

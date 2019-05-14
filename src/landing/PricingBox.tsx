@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { whitestWhite, lightGray } from '../assets/colors';
 
@@ -18,7 +18,10 @@ const PricingBox: React.FC<Props> = ({ title, features, link }) => {
             <li className={css(styles.list)}>
                 {
                     features.map(feature => (
-                        <ul className={css(styles.listElement)}>{feature}</ul>
+                        <ul
+                            className={css(styles.listElement)}
+                            key={feature}
+                        >{feature}</ul>
                     ))
                 }
             </li>

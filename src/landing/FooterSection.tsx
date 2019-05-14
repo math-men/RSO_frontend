@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import {Link } from 'react-router-dom';
 
 import { writerBlack } from '../assets/colors';
 
@@ -34,7 +34,7 @@ const FooterSection: React.FC<Props> = ({ style }) => {
             </ul>
         </div>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
             margin: '0 10px',
         },
     },
-})
+});
 
 export default FooterSection;

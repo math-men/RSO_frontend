@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { StyleSheet, css } from 'aphrodite';
+import { StyleSheet } from 'aphrodite';
 import { ParallaxProvider } from 'react-scroll-parallax';
 
 import AlligatorNavbar from './AlligatorNavbar';
@@ -14,21 +13,21 @@ const LandingPage: React.FC = () => {
     return (
         <div>
             <ParallaxProvider>
-                <AlligatorNavbar style={styles.block}></AlligatorNavbar>
-                <ShortenerSection style={styles.block}></ShortenerSection>
-                <FeaturesSection style={styles.block}></FeaturesSection>
-                <PricingSection style={styles.block}></PricingSection>
-                <FooterSection style={styles.block}></FooterSection>
+                <AlligatorNavbar style={styles.block} />
+                <ShortenerSection style={styles.block} />
+                <FeaturesSection style={styles.block} />
+                <PricingSection style={styles.block} />
+                <FooterSection style={styles.block} />
             </ParallaxProvider>
         </div>
     )
-}
+};
 
 const styles = StyleSheet.create({
     block: {
         paddingLeft: 100,
         paddingRight: 100,
     }
-})
+});
 
 export default LandingPage;

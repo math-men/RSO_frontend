@@ -9,7 +9,7 @@ interface Props {
 const FeatureBox: React.FC<Props> = ({ image, children }) => {
     return (
         <div className={css(styles.featureBox)}>
-            <img src={image} className={css(styles.featureImage)} />
+            <img src={image} className={css(styles.featureImage)} alt="" />
             <p className={css(styles.featureText)}>
                 {children}
             </p>
