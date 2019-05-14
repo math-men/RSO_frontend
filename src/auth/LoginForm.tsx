@@ -1,10 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { StyleSheet, css } from 'aphrodite';
+import {Link} from 'react-router-dom';
+import {StyleSheet, css} from 'aphrodite';
 
-import { AccountCircle, AlternateEmail, VpnKey } from '@material-ui/icons';
+import {AccountCircle, VpnKey} from '@material-ui/icons';
 
-import { leadingBlue, darkGray } from '../assets/colors';
+import {leadingBlue, darkGray} from '../assets/colors';
 
 
 export default class LoginForm extends React.Component {
@@ -16,21 +16,24 @@ export default class LoginForm extends React.Component {
                 <form className={css(styles.form)}>
                     <div className={`input-group mb-3 ${css(styles.row)}`}>
                         <div className="input-group-prepend">
-                            <span className="input-group-text" id="basic-addon1"><AccountCircle /></span>
+                            <span className="input-group-text" id="basic-addon1"><AccountCircle/></span>
                         </div>
-                        <input type="text" className={`form-control ${css(styles.input)}`} placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+                        <input type="text" className={`form-control ${css(styles.input)}`} placeholder="Username"
+                               aria-label="Username" aria-describedby="basic-addon1"/>
                     </div>
                     <div className={`input-group mb-3 ${css(styles.row)}`}>
                         <div className="input-group-prepend">
-                            <span className="input-group-text" id="basic-addon1"><VpnKey /></span>
+                            <span className="input-group-text" id="basic-addon1"><VpnKey/></span>
                         </div>
-                        <input type="text" className={`form-control ${css(styles.input)}`} placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" />
+                        <input type="text" className={`form-control ${css(styles.input)}`} placeholder="Password"
+                               aria-label="Password" aria-describedby="basic-addon1"/>
                     </div>
 
                     <button className={`btn btn-primary ${css(styles.submit)}`}>Log in</button>
                     <p className={css(styles.buttonFootnote)}>
-                            Don't have an account? <Link to="/register">Register</Link>
-                        </p>
+                        Don't have an account? <Link to="/register">Register</Link><br/>
+                        Forgot your password? <Link to="/forgot">Reset</Link>
+                    </p>
                 </form>
             </div>
         )

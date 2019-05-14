@@ -19,7 +19,7 @@ const PricingSection: React.FC<Props> = ({ style }) => {
                     {
                         image: backgroundImage,
                         amount: 0.5,
-                        children: <div></div>
+                        children: <div/>
                     },
 
                 ]}
@@ -37,7 +37,7 @@ const PricingSection: React.FC<Props> = ({ style }) => {
                                 'Reduced access to statistics panel',
                             ]}
                             link=""
-                        ></PricingBox>
+                        />
                         <PricingBox
                             title="Premium version"
                             features={[
@@ -47,13 +47,13 @@ const PricingSection: React.FC<Props> = ({ style }) => {
                                 '24/7 helpdesk in one of the fastest developing countries',
                             ]}
                             link=""
-                        ></PricingBox>
+                        />
                     </div>
                 </div>
             </ParallaxBanner>
         </div>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         fontSize: 79,
         color: whitestWhite,
     },
-})
+});
 
 
 export default PricingSection;

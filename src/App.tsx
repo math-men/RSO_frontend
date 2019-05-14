@@ -13,7 +13,7 @@ const App: React.FC = () => {
     <div className={css(styles.app)}>
       <Router>
         <Route path="/" exact component={LandingPage} />
-        <Route path="/(register|login)" component={AuthPage} />
+        <Route path="/(register|login|forgot)" component={AuthPage} />
       </Router>
     </div>
   );

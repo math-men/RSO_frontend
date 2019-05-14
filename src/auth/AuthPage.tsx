@@ -1,9 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
+import ForgotPassword from './ForgotPassword';
 
 import { smartestBeige, whitestWhite, darkGray } from '../assets/colors';
 import linkIcon from '../assets/icons/link-symbol.png';
@@ -18,6 +19,7 @@ const RegisterPage: React.FC = () => {
                 </Link>
                 <Route path='/register' component={RegisterForm} />
                 <Route path='/login' component={LoginForm} />
+                <Route path='/forgot' component={ForgotPassword} />
             </div>
         </div>
     );
