@@ -101,8 +101,12 @@ export default class AlligatorAnimation extends React.Component<Props, State> {
             </div>
         )
     }
-}
+};
 
+const buttonContainerWidth = 90;
+const textWidth = 700;
+const alligatorWidth = 183;
+const alligatorHeight = 100;
 
 const maskFirstStageAnimation = {
     '0%': {
@@ -111,7 +115,7 @@ const maskFirstStageAnimation = {
     '100%': {
         width: 'calc(100vw - 400px + 183px)',
     }
-}
+};
 const maskSecondStageAnimation = {
     '0%': {
         width: 'calc(100vw - 400px + 183px)',
@@ -119,34 +123,37 @@ const maskSecondStageAnimation = {
     '100%': {
         width: 0,
     },
-}
+};
 const hideText = {
     '0%': {
-        clipPath: 'polygon(0 0, calc(100vw - 400px + 183px) 0, calc(100vw - 400px + 183px) 100%, 0 100%)',
+        clipPath: `polygon(0 0, calc(100vw - 400px + ${alligatorWidth/2}px) 0,` +
+        ` calc(100vw - 400px + ${alligatorWidth/2}px) 100%, 0 100%)`,
     },
     '100%': {
-        clipPath: 'polygon(calc(100vw - 400px + 183px) 0, calc(100vw - 400px + 183px) 0, calc(100vw - 400px + 183px) 100%, calc(100vw - 400px + 183px) 100%)',
+        clipPath: `polygon(calc(100vw - 400px + ${alligatorWidth/2}px) 0, calc(100vw - 400px + ${alligatorWidth/2}px)` +
+        ` 0, calc(100vw - 400px + ${alligatorWidth/2}px) 100%, calc(100vw - 400px + ${alligatorWidth/2}px) 100%)`,
     },
-}
+};
 const showText = {
     '0%': {
-        clipPath: 'polygon(calc(100vw - 400px + 183px) 0, calc(100vw - 400px + 183px) 0, calc(100vw - 400px + 183px) 100%, calc(100vw - 400px + 183px) 100%)',
+        clipPath: `polygon(calc(100vw - 400px + ${alligatorWidth/2}px) 0, calc(100vw - 400px + ${alligatorWidth/2}px)` +
+        ` 0, calc(100vw - 400px + ${alligatorWidth/2}px) 100%, calc(100vw - 400px + ${alligatorWidth/2}px) 100%)`,
     },
     '100%': {
-        clipPath: 'polygon(0 0, calc(100vw - 400px + 183px) 0, calc(100vw - 400px + 183px) 100%, 0 100%)',
+        clipPath: `polygon(0 0, calc(100vw - 400px + ${alligatorWidth/2}px) 0,` +
+        ` calc(100vw - 400px + ${alligatorWidth/2}px) 100%, 0 100%)`,
     },
-}
+};
 
-const buttonContainerWidth = 90;
-const textWidth = 700;
+
 const styles = StyleSheet.create({
     wrapper: {
         height: 34,
     },
     alligator: {
         marginTop: -15,
-        width: 183,
-        height: 100,
+        width: alligatorWidth,
+        height: alligatorHeight,
         position: 'absolute',
         right: 0,
         zIndex: 1000,
@@ -178,11 +185,9 @@ const styles = StyleSheet.create({
     },
     textHiding: {
         animationName: [hideText],
-        animationDelay: '0.5s',
     },
     textShowing: {
         animationName: [showText],
-        animationDelay: '-0.5s',
     },
     mask: {
         position: 'absolute',
@@ -211,4 +216,4 @@ const styles = StyleSheet.create({
         padding: '3px 6px',
         marginLeft: 2,
     }
-})
+});
