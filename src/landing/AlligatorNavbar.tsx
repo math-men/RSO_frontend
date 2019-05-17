@@ -3,7 +3,7 @@ import { StyleSheet, css } from 'aphrodite';
 import { NavHashLink as NavLink } from 'react-router-hash-link';
 
 import { whitestWhite } from '../assets/colors';
-import crocodile from '../assets/icons/crocodile.svg'
+import alligator from '../assets/icons/alligator.svg'
 
 interface Props {
     style?: Object,
@@ -51,7 +51,7 @@ export default class AlligatorNavbar extends React.Component<Props> {
                             to="/"
                         >
                             <img
-                                src={crocodile}
+                                src={alligator}
                                 className={css(
                                     styles.logo,
                                     compressed && styles.logoCompressed,

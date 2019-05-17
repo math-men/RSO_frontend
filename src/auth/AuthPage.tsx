@@ -8,14 +8,14 @@ import ForgotPassword from './ForgotPassword';
 
 import { smartestBeige, whitestWhite, darkGray } from '../assets/colors';
 import linkIcon from '../assets/icons/link-symbol.png';
-import crocodile from '../assets/icons/crocodile.svg';
+import alligator from '../assets/icons/alligator.svg';
 
 const AuthPage: React.FC = () => {
     return (
         <div className={css(styles.container)}>
             <div className={css(styles.contentBox)}>
                 <Link to="">
-                    <img src={crocodile} className={css(styles.logo)} alt="home" />
+                    <img src={alligator} className={css(styles.logo)} alt="home" />
                 </Link>
                 <Route path='/register' component={RegisterForm} />
                 <Route path='/login' component={LoginForm} />
