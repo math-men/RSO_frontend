@@ -1,32 +1,36 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
 import './assets/Lato/latofonts.css';
 
 import LandingPage from './landing/LandingPage';
 import AuthPage from './auth/AuthPage';
+import NotFound from './NotFound';
 
 import { writerBlack } from './assets/colors';
 
 
 const App: React.FC = () => {
-  return (
-    <div className={css(styles.app)}>
-      <Router>
-        <Route path="/" exact component={LandingPage} />
-        <Route path="/(register|login|forgot)" component={AuthPage} />
-      </Router>
-    </div>
-  );
+    return (
+        <div className={css(styles.app)}>
+            <Router>
+                <Switch>
+                    <Route path="/" exact component={LandingPage}/>
+                    <Route path="/(register|login|forgot)" component={AuthPage}/>
+                    <Route component={NotFound}/>
+                </Switch>
+            </Router>
+        </div>
+    );
 };
 
 const styles = StyleSheet.create({
-  app: {
-    textAlign: 'center',
-    color: writerBlack,
-    fontFamily: 'LatoWeb',
-  }
+    app: {
+        textAlign: 'center',
+        color: writerBlack,
+        fontFamily: 'LatoWeb',
+    }
 });
 
 export default App;

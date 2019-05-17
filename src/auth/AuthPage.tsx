@@ -10,7 +10,7 @@ import { smartestBeige, whitestWhite, darkGray } from '../assets/colors';
 import linkIcon from '../assets/icons/link-symbol.png';
 import crocodile from '../assets/icons/crocodile.svg';
 
-const RegisterPage: React.FC = () => {
+const AuthPage: React.FC = () => {
     return (
         <div className={css(styles.container)}>
             <div className={css(styles.contentBox)}>
@@ -23,7 +23,7 @@ const RegisterPage: React.FC = () => {
             </div>
         </div>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
     logo: {
         width: 115,
     },
-})
+});
 
-export default RegisterPage;
+export default AuthPage;
