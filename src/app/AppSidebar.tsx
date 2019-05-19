@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { match, Route } from 'react-router-dom';
 
+import ProfileSidebar from './profile/ProfileSidebar';
+import LinksSidebar from './links/LinksSidebar';
 
 import { writerBlack, whitestWhite, leadingBlue, transparentize } from '../assets/colors';
 
@@ -14,6 +16,14 @@ interface Props {
 const AppSidebar: React.FC<Props> = ({ match }) => {
     return (
         <div className={css(styles.container)}>
+            <Route
+                path={`${match.url}/profile`}
+                component={ProfileSidebar}
+            />
+            <Route
+                path={`${match.url}/links`}
+                component={LinksSidebar}
+            />
         </div>
     );
 };

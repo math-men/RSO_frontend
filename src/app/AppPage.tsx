@@ -3,7 +3,11 @@ import { StyleSheet, css } from 'aphrodite';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import AppNavbar from './AppNavbar';
+import NotFound from '../NotFound';
 import AppSidebar from './AppSidebar';
+import ProfileDashboard from './profile/ProfileDashboard';
+import LinksDashboard from './links/LinksDashboard';
+
 
 const AppPage: React.FC = () => {
     return (
@@ -20,6 +24,22 @@ const AppPage: React.FC = () => {
                     <AppSidebar
                         match={match}
                     />
+                    <Switch>
+                        <Route
+                            path={match.url}
+                            exact
+                            render={() => (<Redirect to={`${match.url}/links`}/>)}
+                        />
+                        <Route
+                            path={`${match.url}/profile`}
+                            component={ProfileDashboard}
+                        />
+                        <Route
+                            path={`${match.url}/links`}
+                            component={LinksDashboard}
+                        />
+                        <Route component={NotFound}/>
+                    </Switch>
                 </div>
             </div>
         )}/>
