@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: whitestWhite,
         top: 0,
+        boxShadow: '0px 0px 30px 0px rgba(0,0,0,0.16)',
     },
     logo: {
         transition: 'all 0.3s',
