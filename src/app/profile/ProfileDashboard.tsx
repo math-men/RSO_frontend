@@ -1,5 +1,9 @@
 import React from 'react';
-import { match } from 'react-router-dom'
+import { Switch, Route, match } from 'react-router-dom';
+
+import AccountDashboard from './AccountDashboard';
+import PaymentDashboard from './PaymentDashboard';
+import NotFound from '../../NotFound';
 
 
 interface Props {
@@ -9,7 +13,19 @@ interface Props {
 
 const ProfileDashboard: React.FC<Props> = ({ match }) => {
     return (
-        <div/>
+        <Switch>
+            <Route
+                path={`${match.url}/account`}
+                component={AccountDashboard}
+            />
+            <Route
+                path={`${match.url}/payment`}
+                component={PaymentDashboard}
+            />
+            <Route
+                component={NotFound}
+            />
+        </Switch>
     );
 };
 

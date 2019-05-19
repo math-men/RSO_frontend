@@ -27,13 +27,16 @@ const NotFound: React.FC = () => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
+        width: '100vw',
         minHeight: '100vh',
         backgroundColor: smartestBeige,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        position: 'fixed',
+        top: 0,
+        left: 0,
     },
     alligator: {
         width: 400,

@@ -11,13 +11,15 @@
     "@types/react-dom": "16.8.4",
     "aphrodite": "^2.3.1",
     "bootstrap": "^4.3.1",
+    "formik": "^1.5.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-router-hash-link": "^1.2.1",
     "react-scripts": "3.0.0",
     "react-scroll-parallax": "^2.1.2",
-    "typescript": "3.4.5"
+    "typescript": "3.4.5",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
