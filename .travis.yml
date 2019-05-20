@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+    - node_modules
+script:
+  - npm run build
+before_deploy:
+  pip install --user awscli
+deploy:
+  provider: script
+  script: ~/.local/bin/aws s3 sync build s3://www.sshort.me/ --region=us-east-1 --delete
+  skip_cleanup: true
+  on:
+    branch: master
+    condition: $DEPLOY = TRUE
