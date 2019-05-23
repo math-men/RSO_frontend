@@ -5,6 +5,7 @@ export const writerBlack = '#373A3C';
 export const leadingBlue = '#1C7CD5';
 export const whitestWhite = '#FFFFFF';
 export const smartestBeige = '#ECEEEF';
+export const errorRed = '#f40017';
 
 export const transparentize = (hex, opacity) => {
     hex = hex.replace('#', '');

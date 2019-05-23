@@ -3,7 +3,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 import alligatorEatingImg from '../assets/animation/alligatorEating.gif';
 import alligatorReturningImg from '../assets/animation/alligatorReturning.png';
-import { whitestWhite } from '../assets/colors';
+import { whitestWhite, errorRed } from '../assets/colors';
 
 
 interface State {
@@ -12,6 +12,7 @@ interface State {
 
 interface Props {
     text: string,
+    error?: string,
     stage: AnimationStage,
     onAnimationFinished: (stage: AnimationStage) => void,
     onBackButton: (event: React.MouseEvent<HTMLButtonElement>) => void,
@@ -53,7 +54,7 @@ export default class AlligatorAnimation extends React.Component<Props, State> {
     };
 
     render() {
-        const { stage, text, onAnimationFinished, onBackButton } = this.props;
+        const { stage, text, error, onAnimationFinished, onBackButton } = this.props;
         const { copied } = this.state;
         return (
             <div className={css(styles.wrapper)}>
@@ -79,19 +80,22 @@ export default class AlligatorAnimation extends React.Component<Props, State> {
                     <h3
                         className={css(
                             styles.text,
-
+                            error ? styles.error : null,
                         )}
                     >
-                        {text}
+                        {error || text}
                     </h3>
                     <div className={css(
                         styles.buttonsContainer,
                         stage === AnimationStage.AnimationFinished ? null : styles.buttonsHidden,
                     )}>
-                        <button
-                            className={`btn btn-outline-light ${css(styles.button)}`}
-                            onClick={this.copyText}
-                        >{copied ? 'Copied' : 'Copy'}</button>
+                        {
+                            error ? null :
+                                <button
+                                    className={`btn btn-outline-light ${css(styles.button)}`}
+                                    onClick={this.copyText}
+                                >{copied ? 'Copied' : 'Copy'}</button>
+                        }
                         <button
                             className={`btn btn-outline-light ${css(styles.button)}`}
                             onClick={onBackButton}
@@ -126,22 +130,22 @@ const maskSecondStageAnimation = {
 };
 const hideText = {
     '0%': {
-        clipPath: `polygon(0 0, calc(100vw - 400px + ${alligatorWidth/2}px) 0,` +
-        ` calc(100vw - 400px + ${alligatorWidth/2}px) 100%, 0 100%)`,
+        clipPath: `polygon(0 0, calc(100vw - 400px + ${alligatorWidth / 2}px) 0,` +
+            ` calc(100vw - 400px + ${alligatorWidth / 2}px) 100%, 0 100%)`,
     },
     '100%': {
-        clipPath: `polygon(calc(100vw - 400px + ${alligatorWidth/2}px) 0, calc(100vw - 400px + ${alligatorWidth/2}px)` +
-        ` 0, calc(100vw - 400px + ${alligatorWidth/2}px) 100%, calc(100vw - 400px + ${alligatorWidth/2}px) 100%)`,
+        clipPath: `polygon(calc(100vw - 400px + ${alligatorWidth / 2}px) 0, calc(100vw - 400px + ${alligatorWidth / 2}px)` +
+            ` 0, calc(100vw - 400px + ${alligatorWidth / 2}px) 100%, calc(100vw - 400px + ${alligatorWidth / 2}px) 100%)`,
     },
 };
 const showText = {
     '0%': {
-        clipPath: `polygon(calc(100vw - 400px + ${alligatorWidth/2}px) 0, calc(100vw - 400px + ${alligatorWidth/2}px)` +
-        ` 0, calc(100vw - 400px + ${alligatorWidth/2}px) 100%, calc(100vw - 400px + ${alligatorWidth/2}px) 100%)`,
+        clipPath: `polygon(calc(100vw - 400px + ${alligatorWidth / 2}px) 0, calc(100vw - 400px + ${alligatorWidth / 2}px)` +
+            ` 0, calc(100vw - 400px + ${alligatorWidth / 2}px) 100%, calc(100vw - 400px + ${alligatorWidth / 2}px) 100%)`,
     },
     '100%': {
-        clipPath: `polygon(0 0, calc(100vw - 400px + ${alligatorWidth/2}px) 0,` +
-        ` calc(100vw - 400px + ${alligatorWidth/2}px) 100%, 0 100%)`,
+        clipPath: `polygon(0 0, calc(100vw - 400px + ${alligatorWidth / 2}px) 0,` +
+            ` calc(100vw - 400px + ${alligatorWidth / 2}px) 100%, 0 100%)`,
     },
 };
 
@@ -179,6 +183,9 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         margin: 0,
+    },
+    error: {
+        color: errorRed,
     },
     textHidden: {
         visibility: 'hidden',

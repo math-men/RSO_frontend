@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
+import api from '../api';
+
 import AlligatorAnimation, { AnimationStage } from './AlligatorAnimation';
 
 import { leadingBlue, whitestWhite } from '../assets/colors';
@@ -8,16 +10,18 @@ import { leadingBlue, whitestWhite } from '../assets/colors';
 interface State {
     working: Boolean,
     link: string,
+    error?: string,
     stage: AnimationStage,
-    request: Promise<string>,
+    request: Promise<object>,
 }
 
 export default class AlligatorInput extends React.Component<{}, State> {
     state = {
         working: false,
         link: '',
+        error: undefined,
         stage: AnimationStage.AnimationEating,
-        request: Promise.resolve(''),
+        request: Promise.resolve({ data: { shortened_url: '' } }),
     }
 
     componentDidMount() {
@@ -37,22 +41,26 @@ export default class AlligatorInput extends React.Component<{}, State> {
     }
 
     handleLinkChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        this.setState({link: event.target.value});
+        this.setState({ link: event.target.value });
     }
 
     handleBackToInput = (): void => {
         this.setState({
             working: false,
+            error: undefined,
             link: '',
             stage: AnimationStage.AnimationEating,
         });
     }
 
-    handleShortLink = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    handleShortLink = (event: React.FormEvent<HTMLFormElement>): void => {
         // TODO: Set real request
-        const request = new Promise<string>(function(resolve) { 
-            setTimeout(resolve.bind(null, 'sshort.me/asdf'), 500);
-        });
+        event.preventDefault();
+        const { link } = this.state;
+        const request: Promise<object> = api.post(
+            '/api/link',
+            { url: link },
+        );
         this.setState({
             request,
             working: true,
@@ -63,31 +71,42 @@ export default class AlligatorInput extends React.Component<{}, State> {
     animationStageFinished = async (stage: AnimationStage): Promise<void> => {
         const { request } = this.state;
         if (stage === AnimationStage.AnimationEating) {
-            this.setState({stage: AnimationStage.AnimationWaitingForResult});
-            const shortLink = await request;
-            this.setState({
-                stage: AnimationStage.AnimationRevealing,
-                link: shortLink,
-            });
+            this.setState({ stage: AnimationStage.AnimationWaitingForResult });
+            try {
+                const { data: { shortened_url: shortLink } } = await request;
+                this.setState({
+                    stage: AnimationStage.AnimationRevealing,
+                    link: shortLink,
+                });
+            } catch (err) {
+                this.setState({
+                    stage: AnimationStage.AnimationRevealing,
+                    error: 'Could not fetch link. Try again later!',
+                })
+            }
         } else if (stage === AnimationStage.AnimationRevealing) {
-            this.setState({stage: AnimationStage.AnimationFinished});
+            this.setState({ stage: AnimationStage.AnimationFinished });
         }
     }
 
     render() {
-        const { working, link, stage } = this.state;
+        const { working, link, stage, error } = this.state;
         if (working) {
             return (
                 <AlligatorAnimation
                     text={link}
                     stage={stage}
+                    error={error}
                     onAnimationFinished={this.animationStageFinished}
                     onBackButton={this.handleBackToInput}
                 />
             );
         }
         return (
-            <div className="input-group mb-3">
+            <form
+                className="input-group mb-3"
+                onSubmit={this.handleShortLink}
+            >
                 <input
                     type="text"
                     className={`form-control ${css(styles.input)}`}
@@ -98,11 +117,10 @@ export default class AlligatorInput extends React.Component<{}, State> {
                 <div className="input-group-append">
                     <button
                         className={`btn ${css(styles.btn)}`}
-                        type="button"
-                        onClick={this.handleShortLink}
+                        type="submit"
                     >Shorten</button>
                 </div>
-            </div>
+            </form>
         )
     }
 }
