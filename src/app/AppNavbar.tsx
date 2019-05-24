@@ -1,40 +1,44 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { Link, match } from 'react-router-dom';
+import { Link, match as matchType } from 'react-router-dom';
 
 
 import alligator from '../assets/icons/alligator.svg';
 
 interface Props {
-    match: match,
+    match: matchType,
 }
 
 
-const AppNavbar: React.FC<Props> = ({ match }) => {
-    return (
-        <div className={css(styles.container)}>
-            <img
-                src={alligator}
-                className={css(styles.logo)}
-                alt="alligator"
-            />
-            <div>
-                <Link
-                    to={`${match.url}/links`}
-                    className={css(styles.link)}
-                >Your links</Link>
-                <Link
-                    to={`${match.url}/profile`}
-                    className={css(styles.link)}
-                >Profile</Link>
-                <Link
-                    to="/logout"
-                    className={`btn btn-primary ${css(styles.button)}`}
-                >Log out</Link>
-            </div>
+const AppNavbar: React.FC<Props> = ({ match }) => (
+    <div className={css(styles.container)}>
+        <img
+            src={alligator}
+            className={css(styles.logo)}
+            alt="alligator"
+        />
+        <div>
+            <Link
+                to={`${match.url}/links`}
+                className={css(styles.link)}
+            >
+                Your links
+            </Link>
+            <Link
+                to={`${match.url}/profile`}
+                className={css(styles.link)}
+            >
+                Profile
+            </Link>
+            <Link
+                to="/logout"
+                className={`btn btn-primary ${css(styles.button)}`}
+            >
+                Log out
+            </Link>
         </div>
-    );
-};
+    </div>
+);
 
 
 const styles = StyleSheet.create({

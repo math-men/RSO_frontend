@@ -1,15 +1,13 @@
 import React from 'react';
-import { match } from 'react-router-dom';
+import { match as matchType } from 'react-router-dom';
 
 
 interface Props {
-    match: match
-};
+    match: matchType,
+}
 
-const LinksSidebar: React.FC<Props> = ({ match }) => {
-    return (
-        <div />
-    );
-};
+const LinksSidebar: React.FC<Props> = () => (
+    <div />
+);
 
 export default LinksSidebar;

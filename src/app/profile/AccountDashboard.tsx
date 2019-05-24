@@ -1,24 +1,22 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { match } from 'react-router-dom';
+import { match as matchType } from 'react-router-dom';
 
 import InvoiceDataForm from './InvoiceDataForm';
 import ChangePasswordForm from './ChangePasswordForm';
 
 
 interface Props {
-    match: match,
-};
+    match: matchType,
+}
 
 
-const AccountDashboard: React.FC<Props> = ({ match }) => {
-    return (
-        <div className={css(styles.container)}>
-            <InvoiceDataForm/>
-            <ChangePasswordForm/>
-        </div>
-    );
-};
+const AccountDashboard: React.FC<Props> = () => (
+    <div className={css(styles.container)}>
+        <InvoiceDataForm />
+        <ChangePasswordForm />
+    </div>
+);
 
 const styles = StyleSheet.create({
     container: {

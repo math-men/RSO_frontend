@@ -14,7 +14,6 @@ const initialValues = {
 };
 
 export default class InvoiceDataForm extends React.Component {
-
     submit = () => { }
 
     render() {
@@ -25,7 +24,7 @@ export default class InvoiceDataForm extends React.Component {
                     onSubmit={this.submit}
                     initialValues={initialValues}
                 >
-                    {({ handleSubmit, handleChange, handleBlur, values, errors }) => (
+                    {() => (
                         <Form className={css(formStyles.form)}>
                             <div className="form-group">
                                 <label className={css(formStyles.formRow)}>
@@ -80,11 +79,13 @@ export default class InvoiceDataForm extends React.Component {
                             <button
                                 type="submit"
                                 className={`btn btn-primary ${css(formStyles.submit)}`}
-                            >Save</button>
+                            >
+                                Save
+                            </button>
                         </Form>
                     )}
                 </Formik>
             </div>
         );
     }
-};
+}

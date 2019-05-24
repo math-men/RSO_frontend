@@ -1,6 +1,6 @@
 import { StyleSheet } from 'aphrodite';
+import { writerBlack, whitestWhite, leadingBlue, transparentize } from './colors';
 
-// eslint-disable-next-line import/prefer-default-export
 export const formStyles = StyleSheet.create({
     formWrapper: {
         width: 380,
@@ -32,5 +32,44 @@ export const formStyles = StyleSheet.create({
         textTransform: 'uppercase',
         paddingLeft: 20,
         paddingRight: 20,
+    },
+});
+
+
+export const sidebarStyles = StyleSheet.create({
+    container: {
+        height: '100%',
+        width: 300,
+        backgroundColor: writerBlack,
+        color: whitestWhite,
+        padding: '35px 50px 10px',
+        textAlign: 'left',
+    },
+    header: {
+        fontFamily: 'LatoWebHeavy',
+        fontSize: 24,
+        color: leadingBlue,
+        marginLeft: 0,
+        marginBottom: 20,
+    },
+    list: {
+        listStyle: 'none',
+        padding: 0,
+        margin: '0 -50px',
+    },
+    link: {
+        color: whitestWhite,
+        fontFamily: 'LatoWebHeavy',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '0 50px',
+        width: '100%',
+        height: 80,
+        textDecoration: 'none',
+        ':hover': { backgroundColor: transparentize(leadingBlue, 0.5) },
+    },
+    linkActive: {
+        backgroundColor: leadingBlue,
+        ':hover': { backgroundColor: leadingBlue },
     },
 });
