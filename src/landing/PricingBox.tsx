@@ -11,27 +11,29 @@ interface Props {
     link: string,
 }
 
-const PricingBox: React.FC<Props> = ({ title, features, link }) => {
-    return (
-        <div className={css(styles.container)}>
-            <h2 className={css(styles.head)}>{title}</h2>
-            <li className={css(styles.list)}>
-                {
-                    features.map(feature => (
-                        <ul
-                            className={css(styles.listElement)}
-                            key={feature}
-                        >{feature}</ul>
-                    ))
-                }
-            </li>
-            <Link
-                to={link}
-                className={`btn btn-primary ${css(styles.button)}`}
-            >Get started</Link>
-        </div>
-    );
-}
+const PricingBox: React.FC<Props> = ({ title, features, link }) => (
+    <div className={css(styles.container)}>
+        <h2 className={css(styles.head)}>{title}</h2>
+        <li className={css(styles.list)}>
+            {
+                features.map(feature => (
+                    <ul
+                        className={css(styles.listElement)}
+                        key={feature}
+                    >
+                        {feature}
+                    </ul>
+                ))
+            }
+        </li>
+        <Link
+            to={link}
+            className={`btn btn-primary ${css(styles.button)}`}
+        >
+Get started
+        </Link>
+    </div>
+);
 
 const styles = StyleSheet.create({
     container: {
@@ -42,9 +44,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
     },
-    head: {
-        marginBottom: 20,
-    },
+    head: { marginBottom: 20 },
     list: {
         listStyleType: 'none',
         padding: 0,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         width: 200,
         alignSelf: 'center',
     },
-})
+});
 
 
 export default PricingBox;

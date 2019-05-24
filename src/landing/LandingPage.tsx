@@ -9,25 +9,23 @@ import PricingSection from './PricingSection';
 import FooterSection from './FooterSection';
 
 
-const LandingPage: React.FC = () => {
-    return (
-        <div>
-            <ParallaxProvider>
-                <AlligatorNavbar style={styles.block} />
-                <ShortenerSection style={styles.block} />
-                <FeaturesSection style={styles.block} />
-                <PricingSection style={styles.block} />
-                <FooterSection style={styles.block} />
-            </ParallaxProvider>
-        </div>
-    )
-};
+const LandingPage: React.FC = () => (
+    <div>
+        <ParallaxProvider>
+            <AlligatorNavbar style={styles.block} />
+            <ShortenerSection style={styles.block} />
+            <FeaturesSection style={styles.block} />
+            <PricingSection style={styles.block} />
+            <FooterSection style={styles.block} />
+        </ParallaxProvider>
+    </div>
+);
 
 const styles = StyleSheet.create({
     block: {
         paddingLeft: 100,
         paddingRight: 100,
-    }
+    },
 });
 
 export default LandingPage;

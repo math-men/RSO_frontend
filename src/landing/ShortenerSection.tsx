@@ -12,35 +12,35 @@ interface Props {
     style?: Object,
 }
 
-const ShortenerSection: React.FC<Props> = ({ style }) => {
-    return (
-        <div id="try" className={css(style, styles.container)}>
-            <ParallaxBanner
-                layers={[
-                    {
-                        image: backgroundImage,
-                        amount: 0.5,
-                        children: <div></div>
-                    },
+const ShortenerSection: React.FC<Props> = ({ style }) => (
+    <div id="try" className={css(style, styles.container)}>
+        <ParallaxBanner
+            layers={[
+                {
+                    image: backgroundImage,
+                    amount: 0.5,
+                    children: <div />,
+                },
 
-                ]}
-                style={{height: '621px'}}
-                className={css(styles.parallax)}
-            >
-                <div className={css(styles.parallaxChildren)}>
-                    <h2 className={css(styles.head)}>Try it out!</h2>
-                    <div className={css(styles.input)}>
-                        <AlligatorInput></AlligatorInput>
-                    </div>
-                    <Link
-                        className={`btn btn-outline-light ${css(styles.btn)}`}
-                        to=""
-                    >Get started for free ></Link>
+            ]}
+            style={{ height: '621px' }}
+            className={css(styles.parallax)}
+        >
+            <div className={css(styles.parallaxChildren)}>
+                <h2 className={css(styles.head)}>Try it out!</h2>
+                <div className={css(styles.input)}>
+                    <AlligatorInput />
                 </div>
-            </ParallaxBanner>
-        </div>
-    )
-}
+                <Link
+                    className={`btn btn-outline-light ${css(styles.btn)}`}
+                    to="/"
+                >
+                    Get started for free &gt;
+                </Link>
+            </div>
+        </ParallaxBanner>
+    </div>
+);
 
 const styles = StyleSheet.create({
     container: {
@@ -70,9 +70,7 @@ const styles = StyleSheet.create({
         width: 700,
         height: 170,
     },
-    btn: {
-        padding: '10px 20px',
-    }
-})
+    btn: { padding: '10px 20px' },
+});
 
 export default ShortenerSection;
