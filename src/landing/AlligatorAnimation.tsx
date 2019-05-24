@@ -27,9 +27,7 @@ export enum AnimationStage {
 
 
 export default class AlligatorAnimation extends React.Component<Props, State> {
-    state = {
-        copied: false,
-    };
+    state = { copied: false };
 
     copyText = async () => {
         const { text } = this.props;
@@ -40,17 +38,21 @@ export default class AlligatorAnimation extends React.Component<Props, State> {
     alligator = () => {
         const { stage } = this.props;
         if (stage === AnimationStage.AnimationEating) {
-            return <img
-                src={alligatorEatingImg}
+            return (
+                <img
+                    src={alligatorEatingImg}
+                    className={css(styles.alligator)}
+                    alt="alligator"
+                />
+            );
+        }
+        return (
+            <img
+                src={alligatorReturningImg}
                 className={css(styles.alligator)}
                 alt="alligator"
-            />;
-        }
-        return <img
-            src={alligatorReturningImg}
-            className={css(styles.alligator)}
-            alt="alligator"
-        />;
+            />
+        );
     };
 
     render() {
@@ -63,7 +65,9 @@ export default class AlligatorAnimation extends React.Component<Props, State> {
                         styles.mask,
                         styles.animation,
                         stage === AnimationStage.AnimationEating ? styles.maskFirstStage : null,
-                        stage === AnimationStage.AnimationWaitingForResult ? styles.maskWaiting : null,
+                        stage === AnimationStage.AnimationWaitingForResult
+                            ? styles.maskWaiting
+                            : null,
                         stage === AnimationStage.AnimationRevealing ? styles.maskSecondStage : null,
                     )}
                     onAnimationEnd={() => onAnimationFinished(stage)}
@@ -76,7 +80,8 @@ export default class AlligatorAnimation extends React.Component<Props, State> {
                     stage === AnimationStage.AnimationEating ? styles.textHiding : null,
                     stage === AnimationStage.AnimationWaitingForResult ? styles.textHidden : null,
                     stage === AnimationStage.AnimationRevealing ? styles.textShowing : null,
-                )}>
+                )}
+                >
                     <h3
                         className={css(
                             styles.text,
@@ -88,24 +93,33 @@ export default class AlligatorAnimation extends React.Component<Props, State> {
                     <div className={css(
                         styles.buttonsContainer,
                         stage === AnimationStage.AnimationFinished ? null : styles.buttonsHidden,
-                    )}>
+                    )}
+                    >
                         {
-                            error ? null :
-                                <button
-                                    className={`btn btn-outline-light ${css(styles.button)}`}
-                                    onClick={this.copyText}
-                                >{copied ? 'Copied' : 'Copy'}</button>
+                            error ? null
+                                : (
+                                    <button
+                                        className={`btn btn-outline-light ${css(styles.button)}`}
+                                        onClick={this.copyText}
+                                        type="button"
+                                    >
+                                        {copied ? 'Copied' : 'Copy'}
+                                    </button>
+                                )
                         }
                         <button
                             className={`btn btn-outline-light ${css(styles.button)}`}
                             onClick={onBackButton}
-                        >Back</button>
+                            type="button"
+                        >
+                            Back
+                        </button>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
-};
+}
 
 const buttonContainerWidth = 90;
 const textWidth = 700;
@@ -113,47 +127,37 @@ const alligatorWidth = 183;
 const alligatorHeight = 100;
 
 const maskFirstStageAnimation = {
-    '0%': {
-        width: 0,
-    },
-    '100%': {
-        width: 'calc(100vw - 400px + 183px)',
-    }
+    '0%': { width: 0 },
+    '100%': { width: 'calc(100vw - 400px + 183px)' },
 };
 const maskSecondStageAnimation = {
-    '0%': {
-        width: 'calc(100vw - 400px + 183px)',
-    },
-    '100%': {
-        width: 0,
-    },
+    '0%': { width: 'calc(100vw - 400px + 183px)' },
+    '100%': { width: 0 },
 };
 const hideText = {
     '0%': {
-        clipPath: `polygon(0 0, calc(100vw - 400px + ${alligatorWidth / 2}px) 0,` +
-            ` calc(100vw - 400px + ${alligatorWidth / 2}px) 100%, 0 100%)`,
+        clipPath: `polygon(0 0, calc(100vw - 400px + ${alligatorWidth / 2}px) 0,`
+            + ` calc(100vw - 400px + ${alligatorWidth / 2}px) 100%, 0 100%)`,
     },
     '100%': {
-        clipPath: `polygon(calc(100vw - 400px + ${alligatorWidth / 2}px) 0, calc(100vw - 400px + ${alligatorWidth / 2}px)` +
-            ` 0, calc(100vw - 400px + ${alligatorWidth / 2}px) 100%, calc(100vw - 400px + ${alligatorWidth / 2}px) 100%)`,
+        clipPath: `polygon(calc(100vw - 400px + ${alligatorWidth / 2}px) 0, calc(100vw - 400px + ${alligatorWidth / 2}px)`
+            + ` 0, calc(100vw - 400px + ${alligatorWidth / 2}px) 100%, calc(100vw - 400px + ${alligatorWidth / 2}px) 100%)`,
     },
 };
 const showText = {
     '0%': {
-        clipPath: `polygon(calc(100vw - 400px + ${alligatorWidth / 2}px) 0, calc(100vw - 400px + ${alligatorWidth / 2}px)` +
-            ` 0, calc(100vw - 400px + ${alligatorWidth / 2}px) 100%, calc(100vw - 400px + ${alligatorWidth / 2}px) 100%)`,
+        clipPath: `polygon(calc(100vw - 400px + ${alligatorWidth / 2}px) 0, calc(100vw - 400px + ${alligatorWidth / 2}px)`
+            + ` 0, calc(100vw - 400px + ${alligatorWidth / 2}px) 100%, calc(100vw - 400px + ${alligatorWidth / 2}px) 100%)`,
     },
     '100%': {
-        clipPath: `polygon(0 0, calc(100vw - 400px + ${alligatorWidth / 2}px) 0,` +
-            ` calc(100vw - 400px + ${alligatorWidth / 2}px) 100%, 0 100%)`,
+        clipPath: `polygon(0 0, calc(100vw - 400px + ${alligatorWidth / 2}px) 0,`
+            + ` calc(100vw - 400px + ${alligatorWidth / 2}px) 100%, 0 100%)`,
     },
 };
 
 
 const styles = StyleSheet.create({
-    wrapper: {
-        height: 34,
-    },
+    wrapper: { height: 34 },
     alligator: {
         marginTop: -15,
         width: alligatorWidth,
@@ -184,43 +188,27 @@ const styles = StyleSheet.create({
         textOverflow: 'ellipsis',
         margin: 0,
     },
-    error: {
-        color: errorRed,
-    },
-    textHidden: {
-        visibility: 'hidden',
-    },
-    textHiding: {
-        animationName: [hideText],
-    },
-    textShowing: {
-        animationName: [showText],
-    },
+    error: { color: errorRed },
+    textHidden: { visibility: 'hidden' },
+    textHiding: { animationName: [hideText] },
+    textShowing: { animationName: [showText] },
     mask: {
         position: 'absolute',
         left: 0,
     },
-    maskFirstStage: {
-        animationName: [maskFirstStageAnimation],
-    },
-    maskSecondStage: {
-        animationName: [maskSecondStageAnimation],
-    },
-    maskWaiting: {
-        width: 'calc(100vw - 400px + 183px)',
-    },
+    maskFirstStage: { animationName: [maskFirstStageAnimation] },
+    maskSecondStage: { animationName: [maskSecondStageAnimation] },
+    maskWaiting: { width: 'calc(100vw - 400px + 183px)' },
     buttonsContainer: {
         display: 'inline-flex',
         justifyContent: 'flex-end',
         width: buttonContainerWidth,
         transition: 'opacity 0.3s',
     },
-    buttonsHidden: {
-        opacity: 0,
-    },
+    buttonsHidden: { opacity: 0 },
     button: {
         fontSize: 10,
         padding: '3px 6px',
         marginLeft: 2,
-    }
+    },
 });

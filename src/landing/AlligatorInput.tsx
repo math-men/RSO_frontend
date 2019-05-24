@@ -65,7 +65,7 @@ export default class AlligatorInput extends React.Component<{}, State> {
             request,
             working: true,
             stage: AnimationStage.AnimationEating,
-        })
+        });
     }
 
     animationStageFinished = async (stage: AnimationStage): Promise<void> => {
@@ -82,7 +82,7 @@ export default class AlligatorInput extends React.Component<{}, State> {
                 this.setState({
                     stage: AnimationStage.AnimationRevealing,
                     error: 'Could not fetch link. Try again later!',
-                })
+                });
             }
         } else if (stage === AnimationStage.AnimationRevealing) {
             this.setState({ stage: AnimationStage.AnimationFinished });
@@ -118,19 +118,20 @@ export default class AlligatorInput extends React.Component<{}, State> {
                     <button
                         className={`btn ${css(styles.btn)}`}
                         type="submit"
-                    >Shorten</button>
+                    >
+                        Shorten
+                    </button>
                 </div>
             </form>
-        )
+        );
     }
 }
+
 
 const styles = StyleSheet.create({
     btn: {
         backgroundColor: leadingBlue,
         color: whitestWhite,
     },
-    input: {
-        padding: 25,
-    },
-})
+    input: { padding: 25 },
+});

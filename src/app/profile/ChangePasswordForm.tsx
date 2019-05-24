@@ -12,7 +12,6 @@ const initialValues = {
 };
 
 export default class ChangePasswordForm extends React.Component {
-
     submit = () => { }
 
     render() {
@@ -23,7 +22,7 @@ export default class ChangePasswordForm extends React.Component {
                     onSubmit={this.submit}
                     initialValues={initialValues}
                 >
-                    {({ handleSubmit, handleChange, handleBlur, values, errors }) => (
+                    {() => (
                         <Form className={css(formStyles.form)}>
                             <div className="form-group">
                                 <label className={css(formStyles.formRow)}>
@@ -58,11 +57,13 @@ export default class ChangePasswordForm extends React.Component {
                             <button
                                 type="submit"
                                 className={`btn btn-primary ${css(formStyles.submit)}`}
-                            >Change</button>
+                            >
+                                Change
+                            </button>
                         </Form>
                     )}
                 </Formik>
             </div>
         );
     }
-};
+}

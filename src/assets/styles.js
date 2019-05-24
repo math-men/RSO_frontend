@@ -1,5 +1,6 @@
 import { StyleSheet } from 'aphrodite';
 
+// eslint-disable-next-line import/prefer-default-export
 export const formStyles = StyleSheet.create({
     formWrapper: {
         width: 380,
@@ -16,9 +17,7 @@ export const formStyles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
     },
-    formRow: {
-        width: '100%',
-    },
+    formRow: { width: '100%' },
     label: {
         display: 'block',
         textTransform: 'uppercase',

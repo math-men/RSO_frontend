@@ -3,7 +3,8 @@ import { StyleSheet, css } from 'aphrodite';
 import { NavHashLink as NavLink } from 'react-router-hash-link';
 
 import { whitestWhite } from '../assets/colors';
-import alligator from '../assets/icons/alligator.svg'
+import alligator from '../assets/icons/alligator.svg';
+
 
 interface Props {
     style?: Object,
@@ -14,9 +15,7 @@ interface State {
 }
 
 export default class AlligatorNavbar extends React.Component<Props> {
-    state = {
-        compressed: false,
-    }
+    state = { compressed: false }
 
     componentWillMount() {
         window.addEventListener('scroll', this.handleScroll);
@@ -29,9 +28,9 @@ export default class AlligatorNavbar extends React.Component<Props> {
     handleScroll = () => {
         const { compressed } = this.state;
         if (window.scrollY > 60 && !compressed) {
-            this.setState({ compressed: true })
+            this.setState({ compressed: true });
         } else if (window.scrollY < 60 && compressed) {
-            this.setState({ compressed: false })
+            this.setState({ compressed: false });
         }
     }
 
@@ -40,12 +39,13 @@ export default class AlligatorNavbar extends React.Component<Props> {
         const { compressed } = this.state;
         return (
             <div>
-                <div className={css(styles.placeholder)}></div>
+                <div className={css(styles.placeholder)} />
                 <div className={css(
                     styles.nav,
                     style,
                     compressed && styles.navCompressed,
-                )}>
+                )}
+                >
                     <div>
                         <NavLink
                             to="/"
@@ -63,49 +63,57 @@ export default class AlligatorNavbar extends React.Component<Props> {
                             className={css(styles.link)}
                             to="/#try"
                             smooth
-                        >Try it now!</NavLink>
+                        >
+                            Try it now!
+                        </NavLink>
                         <NavLink
                             className={css(styles.link)}
                             to="/#features"
                             smooth
-                        >Features</NavLink>
+                        >
+                            Features
+                        </NavLink>
                         <NavLink
                             className={css(styles.link)}
                             to="/#pricing"
                             smooth
-                        >Pricing</NavLink>
+                        >
+                            Pricing
+                        </NavLink>
                     </div>
                     <div>
                         <NavLink
                             className={css(styles.link)}
                             to="/login"
                             smooth
-                        >Login</NavLink>
+                        >
+                            Login
+                        </NavLink>
                         <NavLink
                             className={css(styles.link)}
                             to="/register"
                             smooth
-                        >Sign up</NavLink>
+                        >
+                            Sign up
+                        </NavLink>
                         <NavLink
                             className={`btn btn-primary ${css(styles.button)}`}
                             to=""
                             smooth
-                        >Get Enterprise</NavLink>
+                        >
+                            Get Enterprise
+                        </NavLink>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
-const navHeight = 100
+const navHeight = 100;
 const styles = StyleSheet.create({
-    placeholder: {
-        height: navHeight,
-    },
-    navCompressed: {
-        height: 60,
-    },
+    placeholder: { height: navHeight },
+    navCompressed: { height: 60 },
     nav: {
         transition: 'height 0.3s',
         position: 'fixed',
@@ -138,4 +146,4 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 20,
     },
-})
+});
