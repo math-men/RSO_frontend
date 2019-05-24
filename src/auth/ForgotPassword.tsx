@@ -6,9 +6,8 @@ import { AlternateEmail } from '@material-ui/icons';
 
 import { leadingBlue, darkGray } from '../assets/colors';
 
-
+// eslint-disable-next-line react/prefer-stateless-function
 export default class LoginForm extends React.Component {
-
     render() {
         return (
             <div>
@@ -21,13 +20,20 @@ export default class LoginForm extends React.Component {
                         <input type="text" className={`form-control ${css(styles.input)}`} placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" />
                     </div>
 
-                    <button className={`btn btn-primary ${css(styles.submit)}`}>Send</button>
+                    <button
+                        className={`btn btn-primary ${css(styles.submit)}`}
+                        type="submit"
+                    >
+                        Send
+                    </button>
                     <p className={css(styles.buttonFootnote)}>
-                        <Link to="/login">Log in</Link> | <Link to="/register">Register</Link>
+                        <Link to="/login">Log in</Link>
+                        {' '}
+                        <Link to="/register">Register</Link>
                     </p>
                 </form>
             </div>
-        )
+        );
     }
 }
 
@@ -42,12 +48,8 @@ const styles = StyleSheet.create({
         padding: '30px 38px',
         width: 400,
     },
-    row: {
-        marginBottom: 30,
-    },
-    input: {
-        padding: 23,
-    },
+    row: { marginBottom: 30 },
+    input: { padding: 23 },
     formFootnote: {
         color: darkGray,
         fontSize: 12,
@@ -63,5 +65,5 @@ const styles = StyleSheet.create({
         color: darkGray,
         fontSize: 12,
         marginTop: 3,
-    }
-})
+    },
+});

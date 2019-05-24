@@ -7,8 +7,8 @@ import { AccountCircle, AlternateEmail, VpnKey } from '@material-ui/icons';
 import { leadingBlue, darkGray } from '../assets/colors';
 
 
+// eslint-disable-next-line react/prefer-stateless-function
 export default class RegisterForm extends React.Component {
-
     render() {
         return (
             <div>
@@ -38,17 +38,26 @@ export default class RegisterForm extends React.Component {
                         </div>
                         <input type="text" className={`form-control ${css(styles.input)}`} placeholder="Repeat password" aria-label="Repeat password" aria-describedby="basic-addon1" />
                         <p className={css(styles.formFootnote)}>
-                            Password should be 6 or more characters, must contain at least one letter, number, and special character
+                            Password should be 6 or more characters,
+                            must contain at least one letter,
+                            number, and special character
                         </p>
                     </div>
 
-                    <button className={`btn btn-primary ${css(styles.submit)}`}>Create account</button>
+                    <button
+                        className={`btn btn-primary ${css(styles.submit)}`}
+                        type="submit"
+                    >
+                        Create account
+                    </button>
                     <p className={css(styles.buttonFootnote)}>
-                            Already have an account? <Link to="/login">Sign in</Link>
-                        </p>
+                        Already have an account?
+                        {' '}
+                        <Link to="/login">Sign in</Link>
+                    </p>
                 </form>
             </div>
-        )
+        );
     }
 }
 
@@ -63,12 +72,8 @@ const styles = StyleSheet.create({
         padding: '30px 38px',
         width: 400,
     },
-    row: {
-        marginBottom: 30,
-    },
-    input: {
-        padding: 23,
-    },
+    row: { marginBottom: 30 },
+    input: { padding: 23 },
     formFootnote: {
         color: darkGray,
         fontSize: 12,
@@ -84,5 +89,5 @@ const styles = StyleSheet.create({
         color: darkGray,
         fontSize: 12,
         marginTop: 3,
-    }
-})
+    },
+});

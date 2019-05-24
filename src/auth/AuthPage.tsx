@@ -10,20 +10,18 @@ import { smartestBeige, whitestWhite, darkGray } from '../assets/colors';
 import linkIcon from '../assets/icons/link-symbol.png';
 import alligator from '../assets/icons/alligator.svg';
 
-const AuthPage: React.FC = () => {
-    return (
-        <div className={css(styles.container)}>
-            <div className={css(styles.contentBox)}>
-                <Link to="">
-                    <img src={alligator} className={css(styles.logo)} alt="home" />
-                </Link>
-                <Route path='/register' component={RegisterForm} />
-                <Route path='/login' component={LoginForm} />
-                <Route path='/forgot' component={ForgotPassword} />
-            </div>
+const AuthPage: React.FC = () => (
+    <div className={css(styles.container)}>
+        <div className={css(styles.contentBox)}>
+            <Link to="/">
+                <img src={alligator} className={css(styles.logo)} alt="home" />
+            </Link>
+            <Route path="/register" component={RegisterForm} />
+            <Route path="/login" component={LoginForm} />
+            <Route path="/forgot" component={ForgotPassword} />
         </div>
-    );
-};
+    </div>
+);
 
 const styles = StyleSheet.create({
     container: {
@@ -47,9 +45,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
     },
-    logo: {
-        width: 115,
-    },
+    logo: { width: 115 },
 });
 
 export default AuthPage;
