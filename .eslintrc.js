@@ -22,7 +22,9 @@ module.exports = {
     'react',
   ],
   rules: {
-    indent: ['error', 4],
+    indent: ['error', 4, {
+      'SwitchCase': 1,
+    }],
     '@typescript-eslint/indent': ['error', 4],
     'react/jsx-indent': ['error', 4],
     'react/prop-types': 0,

@@ -1,13 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { connect } from 'react-redux';
 
 import { AccountCircle, VpnKey } from '@material-ui/icons';
 
 import { leadingBlue, darkGray, errorRed } from '../assets/colors';
 import api from '../api';
+
+import { setToken as setTokenAction } from '../redux/auth';
 
 
 const initialValues = {
@@ -22,20 +25,30 @@ const validationSchema = Yup.object().shape({
         .required('This field is required'),
 });
 
-export default class LoginForm extends React.Component {
+interface Props {
+    setToken: (token: string) => void,
+    token: string,
+}
+
+class LoginForm extends React.Component<Props> {
     onSubmit = async (data: Object, { setErrors }: { setErrors: Function }) => {
+        const { setToken } = this.props;
         try {
             const response = await api.post(
                 '/api/user/token',
                 data,
             );
-            console.log(response);
+            setToken(response.data.token);
         } catch (error) {
             setErrors({ password: error.response.data.message });
         }
     }
 
     render() {
+        const { token } = this.props;
+        if (token) {
+            return (<Redirect to="/app" />);
+        }
         return (
             <div>
                 <h1 className={css(styles.head)}>Log in</h1>
@@ -134,3 +147,8 @@ const styles = StyleSheet.create({
         textAlign: 'left',
     },
 });
+
+const mapStateToProps = (state: { auth: { token: string }; }) => ({ token: state.auth.token });
+const mapDispatchToProps = { setToken: setTokenAction };
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
