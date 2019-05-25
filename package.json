@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@types/react-router-hash-link": "^1.2.1",
+    "@types/yup": "^0.26.13",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-typescript": "^4.0.0",
