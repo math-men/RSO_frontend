@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - "stable"
+services:
+  - docker
 cache:
   directories:
     - node_modules
@@ -10,7 +12,11 @@ before_deploy:
   pip install --user awscli
 deploy:
   provider: script
-  script: ~/.local/bin/aws s3 sync build s3://www.sshort.me/ --region=us-east-1 --delete
+  script: >-
+    docker build -t aleksanderbrzozowski/rso-frontend . && 
+    echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && 
+    docker push aleksanderbrzozowski/rso-frontend && 
+    ~/.local/bin/aws ecs update-service --cluster sshort-cluster --service frontend --region us-east-1 --force-new-deployment
   skip_cleanup: true
   on:
     branch: master
