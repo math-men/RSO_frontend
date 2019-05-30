@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { Link } from 'react-router-dom';
+import { NavHashLink as NavLink } from 'react-router-hash-link';
 
 import { whitestWhite, lightGray } from '../assets/colors';
 
@@ -26,12 +26,13 @@ const PricingBox: React.FC<Props> = ({ title, features, link }) => (
                 ))
             }
         </li>
-        <Link
+        <NavLink
             to={link}
             className={`btn btn-primary ${css(styles.button)}`}
+            smooth
         >
-Get started
-        </Link>
+            Get started
+        </NavLink>
     </div>
 );
 

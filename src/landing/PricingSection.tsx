@@ -31,11 +31,11 @@ const PricingSection: React.FC<Props> = ({ style }) => (
                     <PricingBox
                         title="Free version"
                         features={[
-                            'Limited number of links',
+                            'No link control panel',
                             'Links valid only for limited period of time',
-                            'Reduced access to statistics panel',
+                            'No access to statistics panel',
                         ]}
-                        link=""
+                        link="/#try"
                     />
                     <PricingBox
                         title="Premium version"
@@ -45,7 +45,7 @@ const PricingSection: React.FC<Props> = ({ style }) => (
                             'Full access to statistics panel',
                             '24/7 helpdesk in one of the fastest developing countries',
                         ]}
-                        link=""
+                        link="/register"
                     />
                 </div>
             </div>
