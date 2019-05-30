@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, match as matchType } from 'react-router-dom';
+import { Switch, Route, Redirect, match as matchType } from 'react-router-dom';
 
 import AccountDashboard from './AccountDashboard';
 import PaymentDashboard from './PaymentDashboard';
@@ -13,6 +13,11 @@ interface Props {
 
 const ProfileDashboard: React.FC<Props> = ({ match }) => (
     <Switch>
+        <Route
+            path={match.url}
+            exact
+            render={() => (<Redirect to={`${match.url}/account`} />)}
+        />
         <Route
             path={`${match.url}/account`}
             component={AccountDashboard}

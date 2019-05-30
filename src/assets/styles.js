@@ -38,12 +38,15 @@ export const formStyles = StyleSheet.create({
 
 export const sidebarStyles = StyleSheet.create({
     container: {
-        height: '100%',
-        width: 300,
         backgroundColor: writerBlack,
         color: whitestWhite,
         padding: '35px 50px 10px',
         textAlign: 'left',
+
+        gridRowStart: 'app',
+        gridRowEnd: 'end',
+        gridColumnStart: 'start',
+        gridColumnEnd: 'app',
     },
     header: {
         fontFamily: 'LatoWebHeavy',
@@ -71,6 +74,10 @@ export const sidebarStyles = StyleSheet.create({
     linkActive: {
         backgroundColor: leadingBlue,
         ':hover': { backgroundColor: leadingBlue },
+    },
+    stickyContainer: {
+        position: 'sticky',
+        top: 20,
     },
 });
 

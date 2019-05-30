@@ -17,29 +17,25 @@ const AppPage: React.FC = () => (
             <AppNavbar
                 match={match}
             />
-            <div
-                className={css(styles.app)}
-            >
-                <AppSidebar
-                    match={match}
+            <AppSidebar
+                match={match}
+            />
+            <Switch>
+                <Route
+                    path={match.url}
+                    exact
+                    render={() => (<Redirect to={`${match.url}/links`} />)}
                 />
-                <Switch>
-                    <Route
-                        path={match.url}
-                        exact
-                        render={() => (<Redirect to={`${match.url}/links`} />)}
-                    />
-                    <Route
-                        path={`${match.url}/profile`}
-                        component={ProfileDashboard}
-                    />
-                    <Route
-                        path={`${match.url}/links`}
-                        component={LinksDashboard}
-                    />
-                    <Route component={NotFound} />
-                </Switch>
-            </div>
+                <Route
+                    path={`${match.url}/profile`}
+                    component={ProfileDashboard}
+                />
+                <Route
+                    path={`${match.url}/links`}
+                    component={LinksDashboard}
+                />
+                <Route component={NotFound} />
+            </Switch>
         </div>
     )}
     />
@@ -48,8 +44,9 @@ const AppPage: React.FC = () => (
 const styles = StyleSheet.create({
     container: {
         height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
+        display: 'grid',
+        gridTemplateRows: '[start] 60px [app] auto [end]',
+        gridTemplateColumns: '[start] 300px [app] auto [end]',
     },
     app: {
         display: 'flex',

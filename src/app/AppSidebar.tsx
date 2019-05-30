@@ -15,14 +15,16 @@ interface Props {
 
 const AppSidebar: React.FC<Props> = ({ match }) => (
     <div className={css(styles.container)}>
-        <Route
-            path={`${match.url}/profile`}
-            component={ProfileSidebar}
-        />
-        <Route
-            path={`${match.url}/links`}
-            component={LinksSidebar}
-        />
+        <div className={css(styles.stickyContainer)}>
+            <Route
+                path={`${match.url}/profile`}
+                component={ProfileSidebar}
+            />
+            <Route
+                path={`${match.url}/links`}
+                component={LinksSidebar}
+            />
+        </div>
     </div>
 );
 

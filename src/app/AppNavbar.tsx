@@ -43,7 +43,6 @@ const AppNavbar: React.FC<Props> = ({ match }) => (
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -51,6 +50,11 @@ const styles = StyleSheet.create({
         paddingLeft: 100,
         paddingRight: 100,
         boxShadow: '0px 0px 30px 0px rgba(0,0,0,0.16)',
+
+        gridRowStart: 'start',
+        gridRowEnd: 'app',
+        gridColumnStart: 'start',
+        gridColumnEnd: 'end',
     },
     logo: {
         width: 114,
