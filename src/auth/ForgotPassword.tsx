@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { StyleSheet, css } from 'aphrodite';
+import { css } from 'aphrodite';
 
 import { AlternateEmail } from '@material-ui/icons';
 
-import { leadingBlue, darkGray } from '../assets/colors';
+import { authFormStyles as styles } from '../assets/styles';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class LoginForm extends React.Component {
@@ -28,7 +28,7 @@ export default class LoginForm extends React.Component {
                     </button>
                     <p className={css(styles.buttonFootnote)}>
                         <Link to="/login">Log in</Link>
-                        {' '}
+                        <span className={css(styles.separator)}>|</span>
                         <Link to="/register">Register</Link>
                     </p>
                 </form>
@@ -36,34 +36,3 @@ export default class LoginForm extends React.Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    head: {
-        textTransform: 'uppercase',
-        borderBottom: `1px solid ${leadingBlue}`,
-        padding: '40px 33px 10px',
-        fontSize: 30,
-    },
-    form: {
-        padding: '30px 38px',
-        width: 400,
-    },
-    row: { marginBottom: 30 },
-    input: { padding: 23 },
-    formFootnote: {
-        color: darkGray,
-        fontSize: 12,
-        textAlign: 'left',
-        marginTop: 3,
-    },
-    submit: {
-        textTransform: 'uppercase',
-        fontWeight: 'bold',
-        width: 200,
-    },
-    buttonFootnote: {
-        color: darkGray,
-        fontSize: 12,
-        marginTop: 3,
-    },
-});

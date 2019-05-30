@@ -1,93 +1,166 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { StyleSheet, css } from 'aphrodite';
+import { Link, Redirect } from 'react-router-dom';
+import { css } from 'aphrodite';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 import { AccountCircle, AlternateEmail, VpnKey } from '@material-ui/icons';
 
-import { leadingBlue, darkGray } from '../assets/colors';
+import { authFormStyles as styles } from '../assets/styles';
+import api from '../api';
+
+import ButtonLoader from '../baseUI/ButtonLoader';
 
 
-// eslint-disable-next-line react/prefer-stateless-function
-export default class RegisterForm extends React.Component {
+const initialValues = {
+    username: '',
+    email: '',
+    password: '',
+    repeatPassword: '',
+};
+
+const validationSchema = Yup.object().shape({
+    username: Yup.string()
+        .required('This field is required'),
+    email: Yup.string()
+        .required('This field is required')
+        .email('Value must be correct email')
+        .trim(),
+    password: Yup.string()
+        .required('This field is required')
+        .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+            'Password should be 6 or more characters, must contain at least '
+            + 'one uppercase letter, one lowercase letter and one number',
+        ),
+    repeatPassword: Yup.string()
+        .required('This field is required')
+        .oneOf([Yup.ref('password')], 'Passwords must match'),
+});
+
+
+interface State {
+    redirect: boolean,
+}
+
+export default class RegisterForm extends React.Component<{}, State> {
+    state = { redirect: false }
+
+    onSubmit = async (
+        data: Object,
+        { setErrors, setSubmitting }: { setErrors: Function, setSubmitting: Function },
+    ) => {
+        try {
+            await api.post(
+                '/api/user',
+                data,
+            );
+            this.setState({ redirect: true });
+        } catch (error) {
+            setErrors(error.response.data);
+        }
+        setSubmitting(false);
+    }
+
     render() {
+        const { redirect } = this.state;
+        if (redirect) {
+            return (<Redirect to="/login" />);
+        }
         return (
             <div>
                 <h1 className={css(styles.head)}>Create free account</h1>
-                <form className={css(styles.form)}>
-                    <div className={`input-group mb-3 ${css(styles.row)}`}>
-                        <div className="input-group-prepend">
-                            <span className="input-group-text" id="basic-addon1"><AccountCircle /></span>
-                        </div>
-                        <input type="text" className={`form-control ${css(styles.input)}`} placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
-                    </div>
-                    <div className={`input-group mb-3 ${css(styles.row)}`}>
-                        <div className="input-group-prepend">
-                            <span className="input-group-text" id="basic-addon1"><AlternateEmail /></span>
-                        </div>
-                        <input type="text" className={`form-control ${css(styles.input)}`} placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" />
-                    </div>
-                    <div className={`input-group mb-3 ${css(styles.row)}`}>
-                        <div className="input-group-prepend">
-                            <span className="input-group-text" id="basic-addon1"><VpnKey /></span>
-                        </div>
-                        <input type="text" className={`form-control ${css(styles.input)}`} placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" />
-                    </div>
-                    <div className={`input-group mb-3 ${css(styles.row)}`}>
-                        <div className="input-group-prepend">
-                            <span className="input-group-text" id="basic-addon1"><VpnKey /></span>
-                        </div>
-                        <input type="text" className={`form-control ${css(styles.input)}`} placeholder="Repeat password" aria-label="Repeat password" aria-describedby="basic-addon1" />
-                        <p className={css(styles.formFootnote)}>
-                            Password should be 6 or more characters,
-                            must contain at least one letter,
-                            number, and special character
-                        </p>
-                    </div>
+                <Formik
+                    initialValues={initialValues}
+                    onSubmit={this.onSubmit}
+                    validationSchema={validationSchema}
+                >
+                    {({ isSubmitting }) => (
+                        <Form className={css(styles.form)}>
+                            <div className={css(styles.row)}>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text"><AccountCircle /></span>
+                                    </div>
+                                    <Field
+                                        type="text"
+                                        className={`form-control ${css(styles.input)}`}
+                                        placeholder="Username"
+                                        name="username"
+                                    />
+                                </div>
+                                <ErrorMessage name="username">
+                                    {msg => <span className={css(styles.error)}>{msg}</span>}
+                                </ErrorMessage>
+                            </div>
+                            <div className={css(styles.row)}>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text"><AlternateEmail /></span>
+                                    </div>
+                                    <Field
+                                        type="email"
+                                        className={`form-control ${css(styles.input)}`}
+                                        placeholder="Email"
+                                        name="email"
+                                    />
+                                </div>
+                                <ErrorMessage name="email">
+                                    {msg => <span className={css(styles.error)}>{msg}</span>}
+                                </ErrorMessage>
+                            </div>
+                            <div className={css(styles.row)}>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text"><VpnKey /></span>
+                                    </div>
+                                    <Field
+                                        type="password"
+                                        className={`form-control ${css(styles.input)}`}
+                                        placeholder="Password"
+                                        name="password"
+                                    />
+                                </div>
+                                <ErrorMessage name="password">
+                                    {msg => <span className={css(styles.error)}>{msg}</span>}
+                                </ErrorMessage>
+                            </div>
+                            <div className={css(styles.row)}>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text"><VpnKey /></span>
+                                    </div>
+                                    <Field
+                                        type="password"
+                                        className={`form-control ${css(styles.input)}`}
+                                        placeholder="Repeat password"
+                                        name="repeatPassword"
+                                    />
+                                </div>
+                                <ErrorMessage name="repeatPassword">
+                                    {msg => <span className={css(styles.error)}>{msg}</span>}
+                                </ErrorMessage>
+                            </div>
 
-                    <button
-                        className={`btn btn-primary ${css(styles.submit)}`}
-                        type="submit"
-                    >
-                        Create account
-                    </button>
-                    <p className={css(styles.buttonFootnote)}>
-                        Already have an account?
-                        {' '}
-                        <Link to="/login">Sign in</Link>
-                    </p>
-                </form>
+                            <button
+                                className={`btn btn-primary ${css(styles.submit)}`}
+                                type="submit"
+                            >
+                                {
+                                    !isSubmitting ? <span>Create account</span> : (
+                                        <ButtonLoader />
+                                    )
+                                }
+                            </button>
+                            <p className={css(styles.buttonFootnote)}>
+                                Already have an account?
+                                {' '}
+                                <Link to="/login">Sign in</Link>
+                            </p>
+                        </Form>
+                    )}
+                </Formik>
             </div>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    head: {
-        textTransform: 'uppercase',
-        borderBottom: `1px solid ${leadingBlue}`,
-        padding: '40px 33px 10px',
-        fontSize: 30,
-    },
-    form: {
-        padding: '30px 38px',
-        width: 400,
-    },
-    row: { marginBottom: 30 },
-    input: { padding: 23 },
-    formFootnote: {
-        color: darkGray,
-        fontSize: 12,
-        textAlign: 'left',
-        marginTop: 3,
-    },
-    submit: {
-        textTransform: 'uppercase',
-        fontWeight: 'bold',
-        width: 200,
-    },
-    buttonFootnote: {
-        color: darkGray,
-        fontSize: 12,
-        marginTop: 3,
-    },
-});

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'aphrodite';
-import { writerBlack, whitestWhite, leadingBlue, transparentize } from './colors';
+import { writerBlack, whitestWhite, leadingBlue, darkGray, errorRed, transparentize } from './colors';
 
 export const formStyles = StyleSheet.create({
     formWrapper: {
@@ -71,5 +71,48 @@ export const sidebarStyles = StyleSheet.create({
     linkActive: {
         backgroundColor: leadingBlue,
         ':hover': { backgroundColor: leadingBlue },
+    },
+});
+
+export const authFormStyles = StyleSheet.create({
+    head: {
+        textTransform: 'uppercase',
+        borderBottom: `1px solid ${leadingBlue}`,
+        padding: '40px 33px 10px',
+        fontSize: 30,
+    },
+    form: {
+        padding: '30px 38px',
+        width: 400,
+    },
+    row: { marginBottom: 30 },
+    input: { padding: 23 },
+    formFootnote: {
+        color: darkGray,
+        fontSize: 12,
+        textAlign: 'left',
+        marginTop: 3,
+    },
+    submit: {
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        width: 200,
+        height: 38,
+    },
+    buttonFootnote: {
+        color: darkGray,
+        fontSize: 12,
+        marginTop: 3,
+    },
+    error: {
+        color: errorRed,
+        display: 'block',
+        textAlign: 'left',
+        fontSize: 12,
+    },
+    separator: {
+        color: writerBlack,
+        paddingLeft: 10,
+        paddingRight: 10,
     },
 });
