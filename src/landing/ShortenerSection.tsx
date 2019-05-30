@@ -31,12 +31,12 @@ const ShortenerSection: React.FC<Props> = ({ style }) => (
                 <div className={css(styles.input)}>
                     <AlligatorInput />
                 </div>
-                <Link
+                {/* <Link
                     className={`btn btn-outline-light ${css(styles.btn)}`}
                     to="/"
                 >
                     Get started for free &gt;
-                </Link>
+                </Link> */}
             </div>
         </ParallaxBanner>
     </div>
