@@ -12,7 +12,7 @@ const FooterSection: React.FC<Props> = ({ style }) => (
     <div className={css(style, styles.container)}>
         <ul className={css(styles.list)}>
             <li className={css(styles.listElement)}>
-                Copyright © 2019 Firma. All rights reserved.
+                Copyright © 2019 sshort. All rights reserved.
             </li>
             <li className={css(styles.listElement)}>
                 <Link
@@ -30,14 +30,14 @@ const FooterSection: React.FC<Props> = ({ style }) => (
                     Register
                 </Link>
             </li>
-            <li className={css(styles.listElement)}>
+            {/* <li className={css(styles.listElement)}>
                 <Link
                     to="/"
                     className={css(styles.link)}
                 >
                     Terms of use
                 </Link>
-            </li>
+            </li> */}
         </ul>
     </div>
 );
