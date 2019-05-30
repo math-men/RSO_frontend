@@ -17,7 +17,10 @@ export const formStyles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
     },
-    formRow: { width: '100%' },
+    formRow: {
+        width: '100%',
+        margin: 0,
+    },
     label: {
         display: 'block',
         textTransform: 'uppercase',
@@ -32,6 +35,14 @@ export const formStyles = StyleSheet.create({
         textTransform: 'uppercase',
         paddingLeft: 20,
         paddingRight: 20,
+        minWidth: 106,
+        height: 38,
+    },
+    error: {
+        color: errorRed,
+        display: 'block',
+        textAlign: 'left',
+        fontSize: 12,
     },
 });
 
