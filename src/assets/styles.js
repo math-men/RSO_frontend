@@ -66,6 +66,11 @@ export const sidebarStyles = StyleSheet.create({
         marginLeft: 0,
         marginBottom: 20,
     },
+    headerButton: {
+        fontSize: 10,
+        padding: '3px 6px',
+        marginLeft: 15,
+    },
     list: {
         listStyle: 'none',
         padding: 0,
@@ -81,6 +86,19 @@ export const sidebarStyles = StyleSheet.create({
         height: 80,
         textDecoration: 'none',
         ':hover': { backgroundColor: transparentize(leadingBlue, 0.5) },
+    },
+    listItem: { width: '100%' },
+    listItemHead: {
+        display: 'block',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+    },
+    listItemSubsection: {
+        display: 'block',
+        fontFamily: 'latoWeb',
+        fontSize: 12,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
     },
     linkActive: {
         backgroundColor: leadingBlue,
