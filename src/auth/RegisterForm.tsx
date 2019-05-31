@@ -47,13 +47,18 @@ export default class RegisterForm extends React.Component<{}, State> {
     state = { redirect: false }
 
     onSubmit = async (
-        data: Object,
+        data: any,
         { setErrors, setSubmitting }: { setErrors: Function, setSubmitting: Function },
     ) => {
+        const { username, email, password } = data;
         try {
             await api.post(
                 '/api/user',
-                data,
+                {
+                    username,
+                    email,
+                    password,
+                },
             );
             this.setState({ redirect: true });
         } catch (error) {

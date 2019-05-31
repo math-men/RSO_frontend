@@ -45,7 +45,9 @@ class LoginForm extends React.Component<Props> {
             );
             setToken(response.data.token);
         } catch (error) {
-            setErrors({ password: error.response.data.message });
+            if (error.response.data.message) {
+                setErrors({ password: error.response.data.message });
+            }
         }
         setSubmitting(false);
     }
