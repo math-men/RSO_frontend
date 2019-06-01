@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { match as matchType } from 'react-router-dom';
 
-import InvoiceDataForm from './InvoiceDataForm';
+// import InvoiceDataForm from './InvoiceDataForm';
 import ChangePasswordForm from './ChangePasswordForm';
 
 
@@ -13,7 +13,7 @@ interface Props {
 
 const AccountDashboard: React.FC<Props> = () => (
     <div className={css(styles.container)}>
-        <InvoiceDataForm />
+        {/* <InvoiceDataForm /> */}
         <ChangePasswordForm />
     </div>
 );

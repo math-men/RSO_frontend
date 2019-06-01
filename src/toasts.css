@@ -1,0 +1,20 @@
+.Toastify {
+    position: absolute;
+}
+
+.Toastify__toast {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.Toastify__toast.Toastify__toast--success {
+    background-color: rgb(217, 236, 219);
+    border-color: rgb(202, 228, 205);
+    color: rgb(42, 85, 41);
+}
+
+.Toastify__toast.Toastify__toast.Toastify__toast--error {
+    background-color: rgb(243, 216, 218);
+    border-color: rgb(238, 200, 203);
+    color: rgb(105, 34, 38);
+}

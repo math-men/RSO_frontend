@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 import { formStyles } from '../../assets/styles';
 import { createLink as createLinkAction } from '../../redux/links';
@@ -32,7 +33,7 @@ class AddLink extends React.Component<Props, State> {
 
     onSubmit = async (
         data: any,
-        { setErrors, setSubmitting }: { setErrors: Function, setSubmitting: Function },
+        { setSubmitting }: { setSubmitting: Function },
     ) => {
         const { createLink } = this.props;
         try {
@@ -40,11 +41,12 @@ class AddLink extends React.Component<Props, State> {
             if (link) {
                 this.setState({ redirectId: link.id });
             }
+            toast.success('New link created');
         } catch (error) {
-            if (error.response.data.message) {
-                setErrors({ backendError: error.response.data.message });
+            if (error.response.data && error.response.data.message) {
+                toast.error(error.response.data.message);
             } else {
-                setErrors({ backendError: 'Undefined error' });
+                toast.error('Uh-oh! Something went wrong. Please try again');
             }
         }
         setSubmitting(false);

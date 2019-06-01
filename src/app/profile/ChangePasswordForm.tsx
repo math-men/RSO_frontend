@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'aphrodite';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 import { formStyles } from '../../assets/styles';
 import api from '../../api';
@@ -16,25 +17,25 @@ const validationSchema = Yup.object().shape({
     newPassword: Yup.string()
         .required('This field is required')
         .matches(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$/,
             'Password should be 6 or more characters, must contain at least '
             + 'one uppercase letter, one lowercase letter and one number',
         ),
     repeatPassword: Yup.string()
         .required('This field is required')
-        .oneOf([Yup.ref('new')], 'Passwords must match'),
+        .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
 });
 
 const initialValues = {
-    old: '',
-    new: '',
-    repeat: '',
+    oldPassword: '',
+    newPassword: '',
+    repeatPassword: '',
 };
 
 export default class ChangePasswordForm extends React.Component {
     onSubmit = async (
         data: any,
-        { setErrors, setSubmitting }: { setErrors: Function, setSubmitting: Function },
+        { setSubmitting }: { setSubmitting: Function },
     ) => {
         const { oldPassword, newPassword } = data;
         try {
@@ -45,11 +46,12 @@ export default class ChangePasswordForm extends React.Component {
                     newPassword,
                 },
             );
+            toast.success('Password changed');
         } catch (error) {
-            if (error.response.data.message) {
-                setErrors({ backendError: error.response.data.message });
+            if (error.response.data && error.response.data.message) {
+                toast.error(error.response.data.message);
             } else {
-                setErrors({ backendError: 'Undefined error' });
+                toast.error('Uh-oh! Something went wrong. Please try again');
             }
         }
         setSubmitting(false);
@@ -75,7 +77,7 @@ export default class ChangePasswordForm extends React.Component {
                                 />
                             </label>
                             <ErrorMessage
-                                name="old"
+                                name="oldPassword"
                                 className={css(formStyles.error)}
                                 component="span"
                             />
@@ -90,7 +92,7 @@ export default class ChangePasswordForm extends React.Component {
                                 />
                             </label>
                             <ErrorMessage
-                                name="new"
+                                name="newPassword"
                                 className={css(formStyles.error)}
                                 component="span"
                             />
@@ -101,7 +103,7 @@ export default class ChangePasswordForm extends React.Component {
                                 <Field
                                     className={`form-control ${css(formStyles.input)}`}
                                     type="password"
-                                    name="repeat"
+                                    name="repeatPassword"
                                 />
                             </label>
                             <ErrorMessage

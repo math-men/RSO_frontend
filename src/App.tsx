@@ -4,6 +4,8 @@ import { StyleSheet, css } from 'aphrodite';
 import { Provider } from 'react-redux';
 
 import './assets/Lato/latofonts.css';
+import 'react-toastify/dist/ReactToastify.css';
+import './toasts.css';
 
 import store from './redux/store';
 

@@ -22,7 +22,7 @@ const ProfileSidebar: React.FC<Props> = ({ match }) => (
                     Account data
                 </li>
             </NavLink>
-            <NavLink
+            {/* <NavLink
                 to={`${match.url}/payment`}
                 className={css(styles.link)}
                 activeClassName={css(styles.linkActive)}
@@ -30,7 +30,7 @@ const ProfileSidebar: React.FC<Props> = ({ match }) => (
                 <li>
                     Payment
                 </li>
-            </NavLink>
+            </NavLink> */}
         </ul>
     </div>
 );

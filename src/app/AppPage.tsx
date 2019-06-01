@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import AppNavbar from './AppNavbar';
 import NotFound from '../NotFound';
@@ -14,6 +15,13 @@ const AppPage: React.FC = () => (
         <div
             className={css(styles.container)}
         >
+            <ToastContainer
+                hideProgressBar
+                newestOnTop
+                pauseOnHover={false}
+                pauseOnFocusLoss={false}
+                closeButton={false}
+            />
             <AppNavbar
                 match={match}
             />
