@@ -4,22 +4,23 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import { formStyles } from '../../assets/styles';
+import api from '../../api';
 
 import BackendError from '../../baseUI/BackendError';
 import SubmitButton from '../../baseUI/SubmitButton';
 
 
 const validationSchema = Yup.object().shape({
-    old: Yup.string()
+    oldPassword: Yup.string()
         .required('This field is required'),
-    new: Yup.string()
+    newPassword: Yup.string()
         .required('This field is required')
         .matches(
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
             'Password should be 6 or more characters, must contain at least '
             + 'one uppercase letter, one lowercase letter and one number',
         ),
-    repeat: Yup.string()
+    repeatPassword: Yup.string()
         .required('This field is required')
         .oneOf([Yup.ref('new')], 'Passwords must match'),
 });
@@ -32,11 +33,18 @@ const initialValues = {
 
 export default class ChangePasswordForm extends React.Component {
     onSubmit = async (
-        data: Object,
+        data: any,
         { setErrors, setSubmitting }: { setErrors: Function, setSubmitting: Function },
     ) => {
+        const { oldPassword, newPassword } = data;
         try {
-            await new Promise(r => setTimeout(r, 5000));
+            await api.post(
+                '/api/user/password',
+                {
+                    oldPassword,
+                    newPassword,
+                },
+            );
         } catch (error) {
             if (error.response.data.message) {
                 setErrors({ backendError: error.response.data.message });
@@ -63,7 +71,7 @@ export default class ChangePasswordForm extends React.Component {
                                 <Field
                                     className={`form-control ${css(formStyles.input)}`}
                                     type="password"
-                                    name="old"
+                                    name="oldPassword"
                                 />
                             </label>
                             <ErrorMessage
@@ -78,7 +86,7 @@ export default class ChangePasswordForm extends React.Component {
                                 <Field
                                     className={`form-control ${css(formStyles.input)}`}
                                     type="password"
-                                    name="new"
+                                    name="newPassword"
                                 />
                             </label>
                             <ErrorMessage
@@ -97,7 +105,7 @@ export default class ChangePasswordForm extends React.Component {
                                 />
                             </label>
                             <ErrorMessage
-                                name="repeat"
+                                name="repeatPassword"
                                 className={css(formStyles.error)}
                                 component="span"
                             />
