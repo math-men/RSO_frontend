@@ -30,27 +30,18 @@ function appendLink(link) {
 
 export function fetchLinks() {
     return async dispatch => {
-        try {
-            const resp = await api.get('/api/link');
-            await dispatch(setLinks(resp.data));
-        } catch (e) {
-            console.warn(e);
-        }
+        const resp = await api.get('/api/link');
+        await dispatch(setLinks(resp.data));
     };
 }
 
 export function createLink(data) {
     return async dispatch => {
-        try {
-            const resp = await api.post(
-                '/api/link',
-                data,
-            );
-            await dispatch(appendLink(resp.data));
-            return resp.data;
-        } catch (e) {
-            console.warn(e);
-        }
-        return undefined;
+        const resp = await api.post(
+            '/api/link',
+            data,
+        );
+        await dispatch(appendLink(resp.data));
+        return resp.data;
     };
 }

@@ -54,7 +54,6 @@ export default class AlligatorInput extends React.Component<{}, State> {
     }
 
     handleShortLink = (event: React.FormEvent<HTMLFormElement>): void => {
-        // TODO: Set real request
         event.preventDefault();
         const { link } = this.state;
         const request: Promise<object> = api.post(

@@ -48,6 +48,8 @@ class LoginForm extends React.Component<Props> {
         } catch (error) {
             if (error.response.data.message) {
                 setErrors({ backendError: error.response.data.message });
+            } else {
+                setErrors({ backendError: 'Something went wrong! Please try again.' });
             }
         }
         setSubmitting(false);

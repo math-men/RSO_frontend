@@ -66,7 +66,7 @@ export default class RegisterForm extends React.Component<{}, State> {
             if (error.response.data.message) {
                 setErrors({ backendError: error.response.data.message });
             } else {
-                setErrors({ backendError: 'Undefined error' });
+                setErrors({ backendError: 'Something went wrong! Please try again.' });
             }
         }
         setSubmitting(false);
