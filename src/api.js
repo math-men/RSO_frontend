@@ -1,5 +1,6 @@
 import axios from 'axios';
 import store from './redux/store';
+import { resetToken } from './redux/auth';
 
 const api = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
@@ -19,6 +20,16 @@ api.interceptors.request.use(
         return newConfig;
     },
     error => Promise.reject(error),
+);
+
+api.interceptors.response.use(
+    null,
+    error => {
+        if (error.response.status === 401) {
+            store.dispatch(resetToken());
+        }
+        return Promise.reject(error);
+    },
 );
 
 export default api;

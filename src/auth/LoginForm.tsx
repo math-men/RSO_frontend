@@ -30,7 +30,7 @@ const validationSchema = Yup.object().shape({
 
 interface Props {
     setToken: (token: string) => void,
-    token: string,
+    token: string | null,
 }
 
 class LoginForm extends React.Component<Props> {

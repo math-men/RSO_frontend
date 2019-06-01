@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { connect } from 'react-redux';
 
 import AppNavbar from './AppNavbar';
 import NotFound from '../NotFound';
@@ -10,46 +11,55 @@ import ProfileDashboard from './profile/ProfileDashboard';
 import LinksDashboard from './links/LinksDashboard';
 
 
-const AppPage: React.FC = () => (
-    <Route render={({ match }) => (
-        <div
-            className={css(styles.container)}
-        >
-            <ToastContainer
-                hideProgressBar
-                newestOnTop
-                pauseOnHover={false}
-                pauseOnFocusLoss={false}
-                closeButton={false}
-            />
-            <AppNavbar
-                match={match}
-            />
-            <AppSidebar
-                match={match}
-            />
-            <div className={css(styles.app)}>
-                <Switch>
-                    <Route
-                        path={match.url}
-                        exact
-                        render={() => (<Redirect to={`${match.url}/links`} />)}
-                    />
-                    <Route
-                        path={`${match.url}/profile`}
-                        component={ProfileDashboard}
-                    />
-                    <Route
-                        path={`${match.url}/links`}
-                        component={LinksDashboard}
-                    />
-                    <Route component={NotFound} />
-                </Switch>
+interface Props {
+    token: string | null,
+}
+
+const AppPage: React.FC<Props> = ({ token }) => {
+    if (token === null) {
+        return (<Redirect to="/login" />);
+    }
+    return (
+        <Route render={({ match }) => (
+            <div
+                className={css(styles.container)}
+            >
+                <ToastContainer
+                    hideProgressBar
+                    newestOnTop
+                    pauseOnHover={false}
+                    pauseOnFocusLoss={false}
+                    closeButton={false}
+                />
+                <AppNavbar
+                    match={match}
+                />
+                <AppSidebar
+                    match={match}
+                />
+                <div className={css(styles.app)}>
+                    <Switch>
+                        <Route
+                            path={match.url}
+                            exact
+                            render={() => (<Redirect to={`${match.url}/links`} />)}
+                        />
+                        <Route
+                            path={`${match.url}/profile`}
+                            component={ProfileDashboard}
+                        />
+                        <Route
+                            path={`${match.url}/links`}
+                            component={LinksDashboard}
+                        />
+                        <Route component={NotFound} />
+                    </Switch>
+                </div>
             </div>
-        </div>
-    )}
-    />
-);
+        )}
+        />
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -66,4 +76,6 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AppPage;
+const mapStateToProps = (state: { auth: { token: string }; }) => ({ token: state.auth.token });
+
+export default connect(mapStateToProps)(AppPage);

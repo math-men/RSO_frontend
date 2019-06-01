@@ -6,7 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import './assets/Lato/latofonts.css';
 import 'react-toastify/dist/ReactToastify.css';
-import './toasts.css';
+import './assets/toasts.css';
 
 import store, { persistor } from './redux/store';
 
