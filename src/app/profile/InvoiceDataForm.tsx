@@ -5,7 +5,8 @@ import * as Yup from 'yup';
 
 import { formStyles } from '../../assets/styles';
 
-import ButtonLoader from '../../baseUI/ButtonLoader';
+import BackendError from '../../baseUI/BackendError';
+import SubmitButton from '../../baseUI/SubmitButton';
 
 
 const validationSchema = Yup.object().shape({
@@ -36,8 +37,16 @@ export default class InvoiceDataForm extends React.Component {
         data: Object,
         { setErrors, setSubmitting }: { setErrors: Function, setSubmitting: Function },
     ) => {
-        setTimeout(() => setSubmitting(false), 5000);
-        console.log(data);
+        try {
+            await new Promise(r => setTimeout(r, 5000));
+        } catch (error) {
+            if (error.response.data.message) {
+                setErrors({ backendError: error.response.data.message });
+            } else {
+                setErrors({ backendError: 'Undefined error' });
+            }
+        }
+        setSubmitting(false);
     }
 
     render() {
@@ -49,85 +58,92 @@ export default class InvoiceDataForm extends React.Component {
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                 >
-                    {({ isSubmitting }) => (
-                        <Form className={css(formStyles.form)}>
-                            <div className="form-group">
-                                <label className={css(formStyles.formRow)}>
-                                    <span className={css(formStyles.label)}>Name</span>
-                                    <Field
-                                        className={`form-control ${css(formStyles.input)}`}
-                                        type="text"
-                                        name="name"
-                                    />
-                                </label>
-                                <ErrorMessage name="name">
-                                    {msg => <span className={css(formStyles.error)}>{msg}</span>}
-                                </ErrorMessage>
-                            </div>
-                            <div className="form-group">
-                                <label className={css(formStyles.formRow)}>
-                                    <span className={css(formStyles.label)}>Address</span>
-                                    <Field
-                                        className={`form-control ${css(formStyles.input)}`}
-                                        type="text"
-                                        name="address"
-                                    />
-                                </label>
-                                <ErrorMessage name="address">
-                                    {msg => <span className={css(formStyles.error)}>{msg}</span>}
-                                </ErrorMessage>
-                            </div>
-                            <div className="form-group">
-                                <label className={css(formStyles.formRow)}>
-                                    <span className={css(formStyles.label)}>City</span>
-                                    <Field
-                                        className={`form-control ${css(formStyles.input)}`}
-                                        type="text"
-                                        name="city"
-                                    />
-                                </label>
-                                <ErrorMessage name="city">
-                                    {msg => <span className={css(formStyles.error)}>{msg}</span>}
-                                </ErrorMessage>
-                            </div>
-                            <div className="form-group">
-                                <label className={css(formStyles.formRow)}>
-                                    <span className={css(formStyles.label)}>Zip code</span>
-                                    <Field
-                                        className={`form-control ${css(formStyles.input)}`}
-                                        type="text"
-                                        name="zip"
-                                    />
-                                </label>
-                                <ErrorMessage name="zip">
-                                    {msg => <span className={css(formStyles.error)}>{msg}</span>}
-                                </ErrorMessage>
-                            </div>
-                            <div className="form-group">
-                                <label className={css(formStyles.formRow)}>
-                                    <span className={css(formStyles.label)}>Phone</span>
-                                    <Field
-                                        className={`form-control ${css(formStyles.input)}`}
-                                        type="text"
-                                        name="phone"
-                                    />
-                                </label>
-                                <ErrorMessage name="phone">
-                                    {msg => <span className={css(formStyles.error)}>{msg}</span>}
-                                </ErrorMessage>
-                            </div>
-                            <button
-                                type="submit"
-                                className={`btn btn-primary ${css(formStyles.submit)}`}
-                            >
-                                {
-                                    !isSubmitting ? <span>Save</span> : (
-                                        <ButtonLoader />
-                                    )
-                                }
-                            </button>
-                        </Form>
-                    )}
+                    <Form className={css(formStyles.form)}>
+                        <div className="form-group">
+                            <label className={css(formStyles.formRow)}>
+                                <span className={css(formStyles.label)}>Name</span>
+                                <Field
+                                    className={`form-control ${css(formStyles.input)}`}
+                                    type="text"
+                                    name="name"
+                                />
+                            </label>
+                            <ErrorMessage
+                                name="name"
+                                className={css(formStyles.error)}
+                                component="span"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className={css(formStyles.formRow)}>
+                                <span className={css(formStyles.label)}>Address</span>
+                                <Field
+                                    className={`form-control ${css(formStyles.input)}`}
+                                    type="text"
+                                    name="address"
+                                />
+                            </label>
+                            <ErrorMessage
+                                name="address"
+                                className={css(formStyles.error)}
+                                component="span"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className={css(formStyles.formRow)}>
+                                <span className={css(formStyles.label)}>City</span>
+                                <Field
+                                    className={`form-control ${css(formStyles.input)}`}
+                                    type="text"
+                                    name="city"
+                                />
+                            </label>
+                            <ErrorMessage
+                                name="city"
+                                className={css(formStyles.error)}
+                                component="span"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className={css(formStyles.formRow)}>
+                                <span className={css(formStyles.label)}>Zip code</span>
+                                <Field
+                                    className={`form-control ${css(formStyles.input)}`}
+                                    type="text"
+                                    name="zip"
+                                />
+                            </label>
+                            <ErrorMessage
+                                name="zip"
+                                className={css(formStyles.error)}
+                                component="span"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className={css(formStyles.formRow)}>
+                                <span className={css(formStyles.label)}>Phone</span>
+                                <Field
+                                    className={`form-control ${css(formStyles.input)}`}
+                                    type="text"
+                                    name="phone"
+                                />
+                            </label>
+                            <ErrorMessage
+                                name="phone"
+                                className={css(formStyles.error)}
+                                component="span"
+                            />
+                            <BackendError
+                                name="backendError"
+                                className={css(formStyles.error)}
+                            />
+                        </div>
+                        <SubmitButton
+                            className={`btn btn-primary ${css(formStyles.submit)}`}
+                        >
+                            Save
+                        </SubmitButton>
+                    </Form>
                 </Formik>
             </div>
         );

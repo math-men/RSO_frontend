@@ -9,7 +9,8 @@ import { AccountCircle, AlternateEmail, VpnKey } from '@material-ui/icons';
 import { authFormStyles as styles } from '../assets/styles';
 import api from '../api';
 
-import ButtonLoader from '../baseUI/ButtonLoader';
+import BackendError from '../baseUI/BackendError';
+import SubmitButton from '../baseUI/SubmitButton';
 
 
 const initialValues = {
@@ -62,7 +63,11 @@ export default class RegisterForm extends React.Component<{}, State> {
             );
             this.setState({ redirect: true });
         } catch (error) {
-            setErrors(error.response.data);
+            if (error.response.data.message) {
+                setErrors({ backendError: error.response.data.message });
+            } else {
+                setErrors({ backendError: 'Undefined error' });
+            }
         }
         setSubmitting(false);
     }
@@ -80,90 +85,94 @@ export default class RegisterForm extends React.Component<{}, State> {
                     onSubmit={this.onSubmit}
                     validationSchema={validationSchema}
                 >
-                    {({ isSubmitting }) => (
-                        <Form className={css(styles.form)}>
-                            <div className={css(styles.row)}>
-                                <div className="input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text"><AccountCircle /></span>
-                                    </div>
-                                    <Field
-                                        type="text"
-                                        className={`form-control ${css(styles.input)}`}
-                                        placeholder="Username"
-                                        name="username"
-                                    />
+                    <Form className={css(styles.form)}>
+                        <div className={css(styles.row)}>
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"><AccountCircle /></span>
                                 </div>
-                                <ErrorMessage name="username">
-                                    {msg => <span className={css(styles.error)}>{msg}</span>}
-                                </ErrorMessage>
+                                <Field
+                                    type="text"
+                                    className={`form-control ${css(styles.input)}`}
+                                    placeholder="Username"
+                                    name="username"
+                                />
                             </div>
-                            <div className={css(styles.row)}>
-                                <div className="input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text"><AlternateEmail /></span>
-                                    </div>
-                                    <Field
-                                        type="email"
-                                        className={`form-control ${css(styles.input)}`}
-                                        placeholder="Email"
-                                        name="email"
-                                    />
+                            <ErrorMessage
+                                name="username"
+                                className={css(styles.error)}
+                                component="span"
+                            />
+                        </div>
+                        <div className={css(styles.row)}>
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"><AlternateEmail /></span>
                                 </div>
-                                <ErrorMessage name="email">
-                                    {msg => <span className={css(styles.error)}>{msg}</span>}
-                                </ErrorMessage>
+                                <Field
+                                    type="email"
+                                    className={`form-control ${css(styles.input)}`}
+                                    placeholder="Email"
+                                    name="email"
+                                />
                             </div>
-                            <div className={css(styles.row)}>
-                                <div className="input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text"><VpnKey /></span>
-                                    </div>
-                                    <Field
-                                        type="password"
-                                        className={`form-control ${css(styles.input)}`}
-                                        placeholder="Password"
-                                        name="password"
-                                    />
+                            <ErrorMessage
+                                name="email"
+                                className={css(styles.error)}
+                                component="span"
+                            />
+                        </div>
+                        <div className={css(styles.row)}>
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"><VpnKey /></span>
                                 </div>
-                                <ErrorMessage name="password">
-                                    {msg => <span className={css(styles.error)}>{msg}</span>}
-                                </ErrorMessage>
+                                <Field
+                                    type="password"
+                                    className={`form-control ${css(styles.input)}`}
+                                    placeholder="Password"
+                                    name="password"
+                                />
                             </div>
-                            <div className={css(styles.row)}>
-                                <div className="input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text"><VpnKey /></span>
-                                    </div>
-                                    <Field
-                                        type="password"
-                                        className={`form-control ${css(styles.input)}`}
-                                        placeholder="Repeat password"
-                                        name="repeatPassword"
-                                    />
+                            <ErrorMessage
+                                name="password"
+                                className={css(styles.error)}
+                                component="span"
+                            />
+                        </div>
+                        <div className={css(styles.row)}>
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"><VpnKey /></span>
                                 </div>
-                                <ErrorMessage name="repeatPassword">
-                                    {msg => <span className={css(styles.error)}>{msg}</span>}
-                                </ErrorMessage>
+                                <Field
+                                    type="password"
+                                    className={`form-control ${css(styles.input)}`}
+                                    placeholder="Repeat password"
+                                    name="repeatPassword"
+                                />
                             </div>
-
-                            <button
-                                className={`btn btn-primary ${css(styles.submit)}`}
-                                type="submit"
-                            >
-                                {
-                                    !isSubmitting ? <span>Create account</span> : (
-                                        <ButtonLoader />
-                                    )
-                                }
-                            </button>
-                            <p className={css(styles.buttonFootnote)}>
-                                Already have an account?
-                                {' '}
-                                <Link to="/login">Sign in</Link>
-                            </p>
-                        </Form>
-                    )}
+                            <ErrorMessage
+                                name="repeatPassword"
+                                className={css(styles.error)}
+                                component="span"
+                            />
+                            <BackendError
+                                name="backendError"
+                                className={css(styles.error)}
+                            />
+                        </div>
+                        <SubmitButton
+                            className={`btn btn-primary ${css(styles.submit)}`}
+                        >
+                            Create account
+                        </SubmitButton>
+                        <p className={css(styles.buttonFootnote)}>
+                            Already have an account?
+                            {' '}
+                            <Link to="/login">Sign in</Link>
+                        </p>
+                    </Form>
                 </Formik>
             </div>
         );
