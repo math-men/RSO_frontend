@@ -92,8 +92,10 @@ export default class LinkDetails extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
     loader: {
-        margin: 'auto',
-        height: '100vh',
+        position: 'fixed',
+        top: 'calc(50vh - 110px)',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     loaderElement: {
         borderColor: `${leadingBlue} transparent transparent transparent`,
