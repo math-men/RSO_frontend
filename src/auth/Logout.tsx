@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { resetToken as resetTokenAction } from '../redux/auth'; 
+import { resetToken as resetTokenAction } from '../redux/auth';
 
 interface Props {
     resetToken: Function,

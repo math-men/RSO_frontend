@@ -4,7 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
-import ForgotPassword from './ForgotPassword';
+// import ForgotPassword from './ForgotPassword';
 import Logout from './Logout';
 
 import { smartestBeige, whitestWhite, darkGray } from '../assets/colors';
