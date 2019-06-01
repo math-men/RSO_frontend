@@ -5,6 +5,7 @@ import { StyleSheet, css } from 'aphrodite';
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
 import ForgotPassword from './ForgotPassword';
+import Logout from './Logout';
 
 import { smartestBeige, whitestWhite, darkGray } from '../assets/colors';
 import linkIcon from '../assets/icons/link-symbol.png';
@@ -18,7 +19,8 @@ const AuthPage: React.FC = () => (
             </Link>
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
-            <Route path="/forgot" component={ForgotPassword} />
+            {/* <Route path="/forgot" component={ForgotPassword} /> */}
+            <Route path="/logout" component={Logout} />
         </div>
     </div>
 );

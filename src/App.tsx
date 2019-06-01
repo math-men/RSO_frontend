@@ -23,7 +23,7 @@ const App: React.FC = () => (
             <Router>
                 <Switch>
                     <Route path="/" exact component={LandingPage} />
-                    <Route path="/(register|login|forgot)" component={AuthPage} />
+                    <Route path="/(register|login|forgot|logout)" component={AuthPage} />
                     <Route path="/app" component={AppPage} />
                     <Route component={NotFound} />
                 </Switch>
