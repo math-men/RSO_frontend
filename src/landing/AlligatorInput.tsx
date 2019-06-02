@@ -6,6 +6,8 @@ import api from '../api';
 import AlligatorAnimation, { AnimationStage } from './AlligatorAnimation';
 
 import { leadingBlue, whitestWhite } from '../assets/colors';
+import { transformLink } from '../redux/links';
+
 
 interface State {
     working: Boolean,
@@ -21,7 +23,7 @@ export default class AlligatorInput extends React.Component<{}, State> {
         link: '',
         error: undefined,
         stage: AnimationStage.AnimationEating,
-        request: Promise.resolve({ data: { shortened_url: '' } }),
+        request: Promise.resolve({ data: { shortenedUrl: '' } }),
     }
 
     componentDidMount() {
@@ -72,10 +74,11 @@ export default class AlligatorInput extends React.Component<{}, State> {
         if (stage === AnimationStage.AnimationEating) {
             this.setState({ stage: AnimationStage.AnimationWaitingForResult });
             try {
-                const { data: { shortened_url: shortLink } } = await request;
+                const response = await request;
+                const link = transformLink(response.data);
                 this.setState({
                     stage: AnimationStage.AnimationRevealing,
-                    link: shortLink,
+                    link: link.shortenedUrl,
                 });
             } catch (err) {
                 this.setState({

@@ -43,7 +43,7 @@ class LinksSidebar extends React.Component<Props> {
                         >
                             <li className={css(styles.listItem)}>
                                 <span className={css(styles.listItemHead)}>
-                                    {link.shortened_url}
+                                    {link.shortenedUrl}
                                 </span>
                                 <span className={css(styles.listItemSubsection)}>{link.url}</span>
                             </li>

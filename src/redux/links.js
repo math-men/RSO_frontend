@@ -28,10 +28,20 @@ function appendLink(link) {
     };
 }
 
+export function transformLink(link) {
+    return {
+        id: link.shortenedUrl,
+        shortenedUrl: `${process.env.REACT_APP_HOSTNAME}/${link.shortenedUrl}`,
+        url: link.url,
+        expirationDate: link.expirationDate,
+        clicks: link.clicks,
+    };
+}
+
 export function fetchLinks() {
     return async dispatch => {
         const resp = await api.get('/api/link');
-        await dispatch(setLinks(resp.data));
+        await dispatch(setLinks(resp.data.map(transformLink)));
     };
 }
 
@@ -41,7 +51,8 @@ export function createLink(data) {
             '/api/link',
             data,
         );
-        await dispatch(appendLink(resp.data));
-        return resp.data;
+        const link = transformLink(resp.data);
+        await dispatch(appendLink(link));
+        return link;
     };
 }

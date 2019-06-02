@@ -9,9 +9,9 @@ import { leadingBlue, darkGray } from '../../assets/colors';
 interface Link {
     id: string,
     url: string,
-    shortened_url: string,
-    expiration_date: string,
-    clicks: Number,
+    shortenedUrl: string,
+    expirationDate?: string,
+    clicks?: Number,
 }
 
 interface State {
@@ -19,7 +19,7 @@ interface State {
 }
 
 interface Props {
-    match: matchType<{id: string}>,
+    match: matchType<{ id: string }>,
 }
 
 export default class LinkDetails extends React.Component<Props, State> {
@@ -46,7 +46,7 @@ export default class LinkDetails extends React.Component<Props, State> {
     copyText = async () => {
         const { link } = this.state;
         if (link) {
-            await navigator.clipboard.writeText(link.shortened_url);
+            await navigator.clipboard.writeText(link.shortenedUrl);
         }
     };
 
@@ -65,7 +65,7 @@ export default class LinkDetails extends React.Component<Props, State> {
         return (
             <div className={css(styles.container)}>
                 <span className={css(styles.linkName)}>
-                    {link.shortened_url}
+                    {link.shortenedUrl}
                     <button
                         className={`btn btn-outline-primary ${css(styles.copyButton)}`}
                         onClick={this.copyText}
@@ -77,14 +77,22 @@ export default class LinkDetails extends React.Component<Props, State> {
                 <span className={css(styles.originalLink)}>
                     {link.url}
                 </span>
-                <span className={css(styles.date)}>
-                    Expiration date:
-                    <span className={css(styles.dateValue)}>{link.expiration_date}</span>
-                </span>
-                <div className={css(styles.clicksContainer)}>
-                    <span className={css(styles.clicksNumber)}>{link.clicks}</span>
-                    <span className={css(styles.clicksLabel)}>Total clicks</span>
-                </div>
+                {
+                    link.expirationDate && (
+                        <span className={css(styles.date)}>
+                            Expiration date:
+                            <span className={css(styles.dateValue)}>{link.expirationDate}</span>
+                        </span>
+                    )
+                }
+                {
+                    link.clicks && (
+                        <div className={css(styles.clicksContainer)}>
+                            <span className={css(styles.clicksNumber)}>{link.clicks}</span>
+                            <span className={css(styles.clicksLabel)}>Total clicks</span>
+                        </div>
+                    )
+                }
             </div>
         );
     }
