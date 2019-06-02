@@ -162,6 +162,12 @@ export default class RegisterForm extends React.Component<{}, State> {
                                 className={css(styles.error)}
                             />
                         </div>
+                        <p className={css(styles.gdprNote)}>
+                            Your data is administered by sshort.me Sp. z o.o.,
+                            based in Warsaw, pl. Politechniki 1 street, 00-661, entered to the National
+                            Court Register under 0000000000 KRS number, hereinafter referred to as
+                            sshort. You can contact sshort admin at info@sshort.me.
+                        </p>
                         <SubmitButton
                             className={`btn btn-primary ${css(styles.submit)}`}
                         >

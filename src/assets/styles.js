@@ -151,4 +151,11 @@ export const authFormStyles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
     },
+    gdprNote: {
+        color: darkGray,
+        fontSize: 12,
+        marginTop: 3,
+        width: 322,
+        textAlign: 'justify',
+    },
 });
