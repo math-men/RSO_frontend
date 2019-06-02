@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'aphrodite';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
@@ -20,27 +19,18 @@ const validationSchema = Yup.object().shape({
 
 const initialValues = { url: '' };
 
-interface State {
-    redirectId?: string,
-}
-
 interface Props {
     createLink: Function,
 }
 
-class AddLink extends React.Component<Props, State> {
-    state = { redirectId: undefined };
-
+class AddLink extends React.Component<Props> {
     onSubmit = async (
         data: any,
         { setSubmitting }: { setSubmitting: Function },
     ) => {
         const { createLink } = this.props;
         try {
-            const link = await createLink(data);
-            if (link) {
-                this.setState({ redirectId: link.id });
-            }
+            await createLink(data);
             toast.success('New link created');
         } catch (error) {
             if (error.response.data && error.response.data.message) {
@@ -53,10 +43,6 @@ class AddLink extends React.Component<Props, State> {
     }
 
     render() {
-        const { redirectId } = this.state;
-        if (redirectId) {
-            return (<Redirect to={`/app/links/${redirectId}`} />);
-        }
         return (
             <div className={css(formStyles.formWrapper)}>
                 <h1 className={css(formStyles.header)}>Shorten link</h1>
