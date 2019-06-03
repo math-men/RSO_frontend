@@ -5,6 +5,8 @@ import { match as matchType } from 'react-router-dom';
 import api from '../../api';
 
 import { leadingBlue, darkGray } from '../../assets/colors';
+import { transformLink } from '../../redux/links';
+
 
 interface Link {
     id: string,
@@ -40,7 +42,7 @@ export default class LinkDetails extends React.Component<Props, State> {
 
     getLink = async (id: string) => {
         const response = await api.get(`/api/link/${id}`);
-        this.setState({ link: response.data });
+        this.setState({ link: transformLink(response.data) });
     }
 
     copyText = async () => {
@@ -78,20 +80,20 @@ export default class LinkDetails extends React.Component<Props, State> {
                     {link.url}
                 </span>
                 {
-                    link.expirationDate && (
+                    link.expirationDate ? (
                         <span className={css(styles.date)}>
                             Expiration date:
                             <span className={css(styles.dateValue)}>{link.expirationDate}</span>
                         </span>
-                    )
+                    ) : null
                 }
                 {
-                    link.clicks && (
+                    link.clicks ? (
                         <div className={css(styles.clicksContainer)}>
                             <span className={css(styles.clicksNumber)}>{link.clicks}</span>
                             <span className={css(styles.clicksLabel)}>Total clicks</span>
                         </div>
-                    )
+                    ) : null
                 }
             </div>
         );
