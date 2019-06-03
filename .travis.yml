@@ -7,7 +7,7 @@ cache:
   directories:
     - node_modules
 script:
-  - npm run build
+  - REACT_APP_HOSTNAME=sshort.me npm run build
 before_deploy:
   pip install --user awscli
 deploy:
