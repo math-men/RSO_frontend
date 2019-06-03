@@ -5,6 +5,8 @@ import alligatorEatingImg from '../assets/animation/alligatorEating.gif';
 import alligatorReturningImg from '../assets/animation/alligatorReturning.png';
 import { whitestWhite, errorRed } from '../assets/colors';
 
+import CopyButton from '../baseUI/CopyButton';
+
 
 interface State {
     copied: boolean,
@@ -28,12 +30,6 @@ export enum AnimationStage {
 
 export default class AlligatorAnimation extends React.Component<Props, State> {
     state = { copied: false };
-
-    copyText = async () => {
-        const { text } = this.props;
-        await navigator.clipboard.writeText(text);
-        this.setState({ copied: true });
-    };
 
     alligator = () => {
         const { stage } = this.props;
@@ -98,13 +94,13 @@ export default class AlligatorAnimation extends React.Component<Props, State> {
                         {
                             error ? null
                                 : (
-                                    <button
+                                    <CopyButton
                                         className={`btn btn-outline-light ${css(styles.button)}`}
-                                        onClick={this.copyText}
-                                        type="button"
+                                        copyText={text}
+                                        onCopy={() => this.setState({ copied: true })}
                                     >
                                         {copied ? 'Copied' : 'Copy'}
-                                    </button>
+                                    </CopyButton>
                                 )
                         }
                         <button

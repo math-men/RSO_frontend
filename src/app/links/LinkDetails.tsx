@@ -1,11 +1,14 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 import { match as matchType } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import api from '../../api';
 
 import { leadingBlue, darkGray } from '../../assets/colors';
 import { transformLink } from '../../redux/links';
+
+import CopyButton from '../../baseUI/CopyButton';
 
 
 interface Link {
@@ -45,13 +48,6 @@ export default class LinkDetails extends React.Component<Props, State> {
         this.setState({ link: transformLink(response.data) });
     }
 
-    copyText = async () => {
-        const { link } = this.state;
-        if (link) {
-            await navigator.clipboard.writeText(link.shortenedUrl);
-        }
-    };
-
     render() {
         const { link } = this.state;
         if (!link) {
@@ -68,13 +64,13 @@ export default class LinkDetails extends React.Component<Props, State> {
             <div className={css(styles.container)}>
                 <span className={css(styles.linkName)}>
                     {link.shortenedUrl}
-                    <button
+                    <CopyButton
                         className={`btn btn-outline-primary ${css(styles.copyButton)}`}
-                        onClick={this.copyText}
-                        type="button"
+                        copyText={link.shortenedUrl || ''}
+                        onCopy={() => toast.success('Copied to clipboard!')}
                     >
                         Copy
-                    </button>
+                    </CopyButton>
                 </span>
                 <span className={css(styles.originalLink)}>
                     {link.url}
